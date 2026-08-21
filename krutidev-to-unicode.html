@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Krutidev to Unicode — Mission Shakti Yojna</title>
+
+    <!-- OG-Meta -->
+    <meta property="og:title" content="Krutidev to Unicode - Mission Shakti Yojna" />
+    <meta property="og:description" content="Convert Krutidev 010 to Unicode (Google Font)" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="./style.css" rel="stylesheet">
+
+    <style>
+        .converter-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 20px;
+        }
+        .text-area-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 18px;
+            resize: vertical;
+        }
+        .btn-convert {
+            margin: 1rem 0;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .copy-btn {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- Sidebar START -->
+        <nav class="navbar sidebar navbar-expand-xl navbar-light bg-mode" style="z-index: 2000;">
+            <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1" id="offcanvasSidebar">
+                <div class="offcanvas-body sidebar-content d-flex flex-column pt-4">
+                    <ul class="navbar-nav flex-column" id="navbar-sidebar">
+                        <li class="nav-item"> <a class="nav-link" href="./photos.html">photo collage maker</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./index.html">Salary Sheet Generator</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./telepromptor.html">Teleprompter for Speach</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./font-changer.html">Font Changer</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./ppt.html">About Mission Shakti</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./player.html">Video Player</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./form.html">forms</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="./form2.html">forms2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="page-content">
+            <header class="navbar-light header-sticky border-bottom border-2">
+                <nav class="navbar">
+                    <div class="container-fluid main-header">
+                        <div class="d-flex">
+                            <div class="d-grid navbar-expand-xl">
+                                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation" data-bs-auto-close="outside">
+                                    <span class="navbar-toggler-animation">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                </button>
+                            </div>
+                            <a class="navbar-brand" href="./index.html">
+                                <img class="navbar-brand-item" style="max-height: 51px;" src="./logo.jpg" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="container-fluid">
+                <div class="converter-container card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Krutidev to Unicode Converter</h2>
+
+                        <div class="mb-4">
+                            <div class="text-area-label">
+                                <label for="krutitext">Krutidev 010</label>
+                                <button class="btn btn-outline-primary copy-btn" onclick="copyToClipboard('krutitext')">Copy</button>
+                            </div>
+                            <textarea id="krutitext" placeholder="यहाँ Krutidev टेक्स्ट टाइप करें..."></textarea>
+                        </div>
+
+                        <button class="btn btn-primary btn-convert" onclick="krutiunicode()">Convert to Unicode ↓</button>
+
+                        <div class="mt-4">
+                            <div class="text-area-label">
+                                <label for="unicodetext">Unicode (Google Font)</label>
+                                <button class="btn btn-outline-primary copy-btn" onclick="copyToClipboard('unicodetext')">Copy</button>
+                            </div>
+                            <textarea id="unicodetext" placeholder="परिवर्तित Unicode टेक्स्ट यहाँ दिखेगा..."></textarea>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <button class="btn btn-danger" onclick="clearAll()">Clear All</button>
+                            <a href="./font-changer.html" class="btn btn-secondary ms-2">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg-dark mt-auto">
+                <div class="d-lg-flex justify-content-between align-items-center p-3 text-center text-lg-start">
+                    <div class="text-muted text-primary-hover"> Copyrights ©2023 DHEW. Build by Amit Kumar (DEO). </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script src="./jquery.min.js"></script>
+    <script src="./bootstrap.bundle.js"></script>
+    <script src="./krutidev.js"></script>
+
+    <script>
+        function copyToClipboard(id) {
+            var copyText = document.getElementById(id);
+            copyText.select();
+            document.execCommand("copy");
+            alert("Text copied to clipboard!");
+        }
+
+        function clearAll() {
+            document.getElementById("unicodetext").value = '';
+            document.getElementById("krutitext").value = '';
+        }
+    </script>
+</body>
+
+</html>

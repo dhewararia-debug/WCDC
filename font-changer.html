@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Font Changer — Mission Shakti Yojna</title>
+
+  <!-- OG-Meta -->
+  <meta property="og:title" content="Font Changer - Mission Shakti Yojna" />
+  <meta property="og:description" content="Font conversion tools for Unicode and Krutidev" />
+  <meta property="og:site_name" content="Mission Shakti Yojna" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="./style.css" rel="stylesheet">
+
+  <style>
+    .card-hover:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .card-icon {
+      font-size: 3rem;
+      color: #0d6efd;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- Sidebar START -->
+    <nav class="navbar sidebar navbar-expand-xl navbar-light bg-mode" style="z-index: 2000;">
+      <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1" id="offcanvasSidebar">
+        <div class="offcanvas-body sidebar-content d-flex flex-column pt-4">
+          <ul class="navbar-nav flex-column" id="navbar-sidebar">
+            <li class="nav-item"> <a class="nav-link " href="./photos.html">photo collage maker</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./index.html">Salary Sheet Generator</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./telepromptor.html">Teleprompter for Speach</a></li>
+            <li class="nav-item"> <a class="nav-link active" href="./font-changer.html">Font Changer</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./ppt.html">About Mission Shakti</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./player.html">Video Player</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./form.html">forms</a></li>
+            <li class="nav-item"> <a class="nav-link " href="./form2.html">forms2</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <header class="navbar-light header-sticky border-bottom border-2">
+        <nav class="navbar">
+          <div class="container-fluid main-header">
+            <div class="d-flex">
+              <div class="d-grid navbar-expand-xl">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation" data-bs-auto-close="outside">
+                  <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+              </div>
+              <a class="navbar-brand" href="./index.html">
+                <img class="navbar-brand-item" style="max-height: 51px;" src="./logo.jpg" alt="logo">
+              </a>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <div class="container py-5">
+        <h2 class="text-center mb-5">Select Font Conversion Type</h2>
+        <div class="row g-4 justify-content-center">
+          <!-- Unicode to Krutidev -->
+          <div class="col-md-5">
+            <a href="./unicode-to-krutidev.html" class="text-decoration-none text-dark">
+              <div class="card h-100 text-center p-4 border-0 shadow-sm card-hover">
+                <div class="card-body">
+                  <div class="card-icon mb-3">🔤</div>
+                  <h4 class="card-title">Unicode to Krutidev</h4>
+                  <p class="card-text text-muted">Convert Google Font (Unicode) to Krutidev 010 legacy font.</p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Krutidev to Unicode -->
+          <div class="col-md-5">
+            <a href="./krutidev-to-unicode.html" class="text-decoration-none text-dark">
+              <div class="card h-100 text-center p-4 border-0 shadow-sm card-hover">
+                <div class="card-body">
+                  <div class="card-icon mb-3">🔄</div>
+                  <h4 class="card-title">Krutidev to Unicode</h4>
+                  <p class="card-text text-muted">Convert Krutidev 010 legacy font back to Google Font (Unicode).</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <footer class="bg-dark mt-auto">
+        <div class="d-lg-flex justify-content-between align-items-center p-3 text-center text-lg-start">
+          <div class="text-muted text-primary-hover"> Copyrights ©2023 DHEW. Build by Amit Kumar (DEO). </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script src="./jquery.min.js"></script>
+  <script src="./bootstrap.bundle.js"></script>
+</body>
+
+</html>
