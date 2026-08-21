@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Salary Table Sheet Creator — Bootstrap 5 Version</title>
+
+  
+   <!-- OG-Meta -->
+    <meta property="og:title" content="Mission Shakti Yojna " />
+    <meta property="og:description" content="Mission Shakti Yojna " />
+    <meta property="og:site_name" content="Mission Shakti Yojna" />
+    <meta property="og:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+    <!-- OG-Meta -->
+
+    <!-- Twitter-Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mission Shakti Yojna" />
+    <meta name="twitter:description" content="Mission Shakti Yojna" />
+    <meta name="twitter:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+    <!-- Twitter-Meta -->
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="./choices.min.css" rel="stylesheet">
+  <link href="./flatpickr.min.css" rel="stylesheet">
+  <link href="./tagsinput.css" rel="stylesheet">
+  <link href="./style.css" rel="stylesheet">
+ 
+
+<style>
+body{margin:0;background:#000;color:#fff;overflow:hidden;font-family:system-ui;}
+#prompter{font-size:40px; height:100%; width:100%}
+#content{position:relative;line-height:1.7}
+.word.active{background:#ffc107;color:#000;border-radius:4px;padding:2px 4px}
+
+/* TOOLS */
+/* TOOLS TOGGLE BUTTON */
+#toolsToggle{
+
+ left:10px;
+ top:0%;
+ z-index:1000;
+ background:#0d6efd;
+ color:#fff;
+ border:none;
+ border-radius:8px;
+ padding:8px 10px;
+ font-size:20px;
+}
+
+/* LEFT TOOLS PANEL */
+#tools{
+ position:fixed;
+ top:80px;
+ bottom:0;
+ width:70px;
+ background:rgba(0,0,0,.85);
+ display:flex;
+ flex-direction:column;
+ gap:8px; 
+ padding:10px 6px;
+ transform:translateX(-100%);
+ transition:.3s ease;
+ z-index:999;
+}
+
+#tools.show{
+ transform:translateX(0);
+}
+
+.tool-btn{
+ background:#222;
+ color:#fff;
+ border:none;
+ border-radius:8px;
+ padding:8px;
+ font-size:18px;
+}
+
+.tool-btn.active{
+ background:#0d6efd;
+}
+
+#tools input{
+ width:100%;
+}
+.tool-range{width:80px}
+
+/* VOLUME */
+#volume{
+ position:fixed;left:10px;bottom:70px;
+ width:120px;height:8px;background:#333;
+ border-radius:5px;overflow:hidden
+}
+#volume div{height:100%;width:0%;background:#0d6efd}
+</style>
+</head>
+
+<body>
+ <main>
+
+   <!-- Sidebar START -->
+    <nav class="navbar sidebar navbar-expand-xl navbar-light bg-mode" style="z-index: 2000;">
+
+
+      <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
+        id="offcanvasSidebar">
+        <div class="offcanvas-body sidebar-content d-flex flex-column pt-4">
+
+
+          <!-- Sidebar menu START -->
+          <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+            <!-- Menu item -->
+            <li class="nav-item"> <a class="nav-link " href="./photos.html">photo collage maker</a></li>
+
+            <li class="nav-item"> <a class="nav-link" href="./index.html">Salary Sheet Generator</a></li>
+
+            <li class="nav-item"> <a class="nav-link active" href="./telepromptor.html">Teleprompter for Speach</a></li>
+
+             <li class="nav-item"> <a class="nav-link " href="./ppt.html">About Mission Shakti</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="./player.html">Video Player</a></li>
+
+          </ul>
+          <!-- Sidebar menu end -->
+
+
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar END -->
+ <div class="page-content">
+
+      <header class="navbar-light header-sticky border-bottom border-2">
+        <nav class="navbar">
+          <div class="container-fluid main-header">
+            <div class="d-flex">
+              <div class="d-grid navbar-expand-xl">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation" data-bs-auto-close="outside">
+                  <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+              
+              </div>
+              <!-- TOOLS TOGGLE -->
+               <button id="toolsToggle">☰</button>
+              <a class="navbar-brand" href="./index.html">
+                <img class="navbar-brand-item" style="max-height: 51px;" src="./logo.jpg" alt="logo" title="Multi Mini Projhets">
+              </a>
+            </div>
+           
+          </div>
+        </nav>
+      </header>
+      <!-- LEFT TOOLS PANEL -->
+<div id="tools" class="hidden">
+ <button class="tool-btn" data-bs-toggle="modal" data-bs-target="#scriptModal">📝</button>
+ <button class="tool-btn" id="play">▶</button>
+ <button class="tool-btn" id="rewind">⏪</button>
+
+ <button class="tool-btn active" id="voice">🎤</button>
+ <button class="tool-btn" id="highlight">🔦</button>
+ <button class="tool-btn" id="mirror">🪞</button>
+
+ <input type="range" min="0.1" max="3" step="0.1" id="speed">
+ <input type="range" min="20" max="80" id="fontSize">
+ <input type="color" id="fontColor">
+
+ 
+ <button class="tool-btn" id="fullscreen">⛶</button>
+</div>
+   <div class="container-fluid">
+
+<div id="prompter">
+ <div id="content">📝 Script जोड़ें और ▶ दबाएँ…</div>
+</div>
+
+<div id="volume"><div></div></div>
+
+
+
+
+
+<!-- SCRIPT MODAL -->
+<div class="modal fade" id="scriptModal">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+<div class="modal-content text-dark">
+<div class="modal-header">
+<h5 class="modal-title">Script Manager</h5>
+<button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+
+   <div class="form-floating mb-3">
+     <input type="text" value="2" id="scriptName" class="form-control" placeholder="Script Name">
+     <label>Script Name</label>
+   </div>
+
+   <div class="form-floating mb-2">
+     <textarea value="" id="scriptText" rows="6" class="form-control" placeholder="Script Text"></textarea>
+     <label>Script Text</label>
+   </div>
+
+
+
+  
+  
+<button class="btn btn-success w-100" id="saveScript">💾 Save / Update</button>
+  <div class="position-relative my-2">
+    <hr>
+    <p class="small bg-mode position-absolute top-50 start-50 translate-middle px-2">Saved Script</p>
+  </div>
+
+  
+  <div class="form-floating mb-2">
+    <select id="scriptList" class="form-select" ></select>
+    <label for="scriptList">Select saved Script</label>
+  </div>
+ <div class="row g-2">
+    <div class="col-6">
+<button class="btn btn-primary w-100 mb-2" id="loadScript">▶ Load</button>
+    </div>
+    <div class="col-6">
+<button class="btn btn-danger w-100" id="deleteScript">🗑 Delete</button>
+       </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+  <main>
+
+     <!-- Bootstrap JS -->
+      <script src="./jquery.min.js"></script>
+
+      <script src="./bootstrap.bundle.js"></script>
+
+      <script src="./flatpickr.min.js"></script>
+
+      <script src="./choices.min.js"></script>
+
+      <script src="./tagsinput.js"></script>
+
+      <script src="./functions.js"></script>
+
+
+<script>
+/* ================= CORE ================= */
+let touchStartX = 0;
+let touchEndX = 0;
+const SWIPE_EDGE = 30;   // px from left edge
+const SWIPE_MIN = 60;   // minimum swipe distance
+ 
+let wakeLock = null;
+let ctx, analyser, data;
+let micStarted=false;
+let scrollPos=0, speed=0.6, paused=true;
+let voice=true, highlight=false, mirrored=false;
+let words=[], index=0;
+let rewinding=false;
+let manualRewinding = false;
+
+/* ========== VOICE & SILENCE ========== */
+let manualVoiceOff=false;
+let silenceStartTime=null;
+let autoRewinding=false;
+let autoRewindStart=0;
+
+const VOICE_THRESHOLD=120;
+const SILENCE_REWIND_AFTER=2000;
+const AUTO_REWIND_DURATION=2000;
+const AUTO_REWIND_SPEED=1.2;
+
+/* ================= STORAGE ================= */
+const LS={
+ voice:"tp_voice",
+ highlight:"tp_highlight",
+ mirror:"tp_mirror",
+ speed:"tp_speed",
+ fontSize:"tp_fontSize",
+ fontColor:"tp_fontColor",
+ lastScript:"tp_lastScript"
+};
+
+function saveSetting(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function loadSetting(k,d){return JSON.parse(localStorage.getItem(k)??JSON.stringify(d));}
+
+ /* ================= SCREEN WAKE LOCK ================= */
+
+async function enableWakeLock(){
+ try{
+  if('wakeLock' in navigator && !wakeLock){
+   wakeLock = await navigator.wakeLock.request('screen');
+   console.log("🔒 Wake Lock Enabled");
+
+   wakeLock.addEventListener('release', ()=>{
+    console.log("🔓 Wake Lock Released");
+    wakeLock = null;
+   });
+  }
+ }catch(err){
+  console.warn("Wake Lock Failed:", err);
+ }
+}
+
+function disableWakeLock(){
+ if(wakeLock){
+  wakeLock.release();
+  wakeLock = null;
+ }
+}
+
+/* ================= INIT ================= */
+$(function(){
+ voice=loadSetting(LS.voice,true);
+ highlight=loadSetting(LS.highlight,false);
+ mirrored=loadSetting(LS.mirror,false);
+ speed=loadSetting(LS.speed,0.6);
+ let fs=loadSetting(LS.fontSize,40);
+ let fc=loadSetting(LS.fontColor,"#ffffff");
+
+ $("#voice").toggleClass("active",voice);
+ $("#highlight").toggleClass("active",highlight);
+ $("#mirror").toggleClass("active",mirrored);
+ $("#speed").val(speed);
+ $("#fontSize").val(fs);
+ $("#fontColor").val(fc);
+ $("#prompter").css("font-size",fs+"px");
+ $("#content").css("color",fc);
+ $("#content").css("transform",mirrored?"scaleX(-1)":"");
+});
+
+/* ================= TEXT ================= */
+function prepare(text){
+ words=text.trim().split(/\s+/);
+ $("#content").html(words.map((w,i)=>`<span class="word" data-i="${i}">${w}</span>`).join(" "));
+ scrollPos=0;index=0;
+}
+
+/* ================= MIC ================= */
+function startMic(){
+ if(micStarted) return;
+ micStarted=true;
+ navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{
+  ctx=new AudioContext();
+  analyser=ctx.createAnalyser();
+  let src=ctx.createMediaStreamSource(s);
+  src.connect(analyser);
+  analyser.fftSize=256;
+  data=new Uint8Array(analyser.frequencyBinCount);
+  loop();
+ });
+}
+
+/* ================= LOOP ================= */
+function loop(){
+ analyser.getByteFrequencyData(data);
+ let energy=data.slice(10,40).reduce((a,b)=>a+b,0);
+ $("#volume div").css("width",Math.min(100,energy/5)+"%");
+
+ let now=performance.now();
+
+ if(!voice && !manualVoiceOff && energy>VOICE_THRESHOLD){
+  voice=true;
+  $("#voice").addClass("active");
+  saveSetting(LS.voice,true);
+  silenceStartTime=null;
+  autoRewinding=false;
+ }
+
+ if(voice && energy<=VOICE_THRESHOLD){
+  if(!silenceStartTime) silenceStartTime=now;
+  if(!autoRewinding && now-silenceStartTime>=SILENCE_REWIND_AFTER){
+   autoRewinding=true;
+   autoRewindStart=now;
+  }
+ }else{
+  silenceStartTime=null;
+ }
+
+ if(!paused){
+  /* ⛔ Manual rewind has priority */
+if(manualRewinding){
+ requestAnimationFrame(loop);
+ return;
+}
+  if(autoRewinding){
+   let e=now-autoRewindStart;
+   if(e<=AUTO_REWIND_DURATION){
+    scrollPos=Math.max(0,scrollPos-AUTO_REWIND_SPEED);
+    index=Math.max(0,index-0.03);
+    $("#content").css("top",-scrollPos+"px");
+   }else autoRewinding=false;
+   requestAnimationFrame(loop);return;
+  }
+
+  if(voice && energy>VOICE_THRESHOLD){
+   let boost=Math.min(1.6,energy/300);
+   scrollPos+=speed*boost;
+   if(highlight){
+    $(".word").removeClass("active");
+    $(`.word[data-i='${Math.floor(index)}']`).addClass("active");
+    index+=speed*0.025;
+   }
+  }
+  $("#content").css("top",-scrollPos+"px");
+ }
+ requestAnimationFrame(loop);
+}
+
+/* ================= CONTROLS ================= */
+$("#play").click(()=>{
+ if(words.length===0){
+  alert("पहले Script load करें");
+  return;
+ }
+
+ startMic();
+ paused = !paused;
+ $("#play").text(paused ? "▶" : "⏸");
+
+ if(!paused){
+  enableWakeLock();   // 🔒 screen awake
+ }else{
+  disableWakeLock();  // 🔓 allow sleep
+ }
+});
+
+ document.addEventListener("visibilitychange", ()=>{
+ if(document.hidden){
+  disableWakeLock();
+ }else if(!paused){
+  enableWakeLock();
+ }
+});
+
+ /* ================= MANUAL REWIND ================= */
+
+$("#rewind").on("mousedown touchstart", function () {
+ manualRewinding = true;
+
+ (function rewindLoop(){
+  if(!manualRewinding) return;
+
+  scrollPos = Math.max(0, scrollPos - 4);
+  index = Math.max(0, index - 0.2);
+
+  $("#content").css("top", -scrollPos + "px");
+
+  requestAnimationFrame(rewindLoop);
+ })();
+});
+
+$("#rewind").on("mouseup touchend touchcancel", function () {
+ manualRewinding = false;
+});
+
+$("#voice").click(()=>{
+ voice=!voice;
+ manualVoiceOff=!voice;
+ $("#voice").toggleClass("active",voice);
+ saveSetting(LS.voice,voice);
+});
+
+$("#highlight").click(()=>{
+ highlight=!highlight;
+ $("#highlight").toggleClass("active",highlight);
+ saveSetting(LS.highlight,highlight);
+});
+
+$("#mirror").click(()=>{
+ mirrored=!mirrored;
+ $("#mirror").toggleClass("active",mirrored);
+ $("#content").css("transform",mirrored?"scaleX(-1)":"");
+ saveSetting(LS.mirror,mirrored);
+});
+
+$("#speed").on("input",e=>{
+ speed=parseFloat(e.target.value);
+ saveSetting(LS.speed,speed);
+});
+
+$("#fontSize").on("input",e=>{
+ $("#prompter").css("font-size",e.target.value+"px");
+ saveSetting(LS.fontSize,e.target.value);
+});
+
+$("#fontColor").on("input",e=>{
+ $("#content").css("color",e.target.value);
+ saveSetting(LS.fontColor,e.target.value);
+});
+
+/* ================= SCRIPT STORAGE (FIXED) ================= */
+
+function loadList(){
+ let s = JSON.parse(localStorage.getItem("teleScripts") || "{}");
+ $("#scriptList").empty();
+ Object.keys(s).forEach(k=>{
+  $("#scriptList").append(`<option value="${k}">${k}</option>`);
+ });
+}
+loadList();
+
+/* SAVE / UPDATE */
+$("#saveScript").off("click").on("click", ()=>{
+ let name = $("#scriptName").val().trim();
+ let text = $("#scriptText").val().trim();
+
+ if(!name || !text){
+  alert("Script Name और Text दोनों जरूरी हैं");
+  return;
+ }
+
+ let scripts = JSON.parse(localStorage.getItem("teleScripts") || "{}");
+ scripts[name] = text;
+
+ localStorage.setItem("teleScripts", JSON.stringify(scripts));
+ loadList();
+
+ alert("Script Saved / Updated ✔");
+});
+
+/* LOAD */
+$("#loadScript").off("click").on("click", ()=>{
+ let key = $("#scriptList").val();
+ if(!key) return;
+
+ let scripts = JSON.parse(localStorage.getItem("teleScripts") || "{}");
+ prepare(scripts[key]);
+
+ $("#scriptName").val(key);
+ $("#scriptText").val(scripts[key]);
+
+ localStorage.setItem("tp_lastScript", JSON.stringify(key));
+
+ paused = true;
+ $("#play").text("▶");
+});
+
+/* DELETE */
+$("#deleteScript").off("click").on("click", ()=>{
+ let key = $("#scriptList").val();
+ if(!key){
+  alert("पहले Script select करें");
+  return;
+ }
+
+ if(!confirm("क्या आप वाकई इस Script को delete करना चाहते हैं?")) return;
+
+ let scripts = JSON.parse(localStorage.getItem("teleScripts") || "{}");
+ delete scripts[key];
+
+ localStorage.setItem("teleScripts", JSON.stringify(scripts));
+ loadList();
+
+ $("#scriptName").val("");
+ $("#scriptText").val("");
+ $("#content").html("📝 Script जोड़ें और ▶ दबाएँ…");
+
+ alert("Script Deleted ✔");
+});
+ /* AUTO-FILL SCRIPT NAME & TEXT ON SELECT */
+$("#scriptList").on("change", function(){
+ let key = $(this).val();
+ if(!key) return;
+
+ let scripts = JSON.parse(localStorage.getItem("teleScripts") || "{}");
+
+ $("#scriptName").val(key);
+ $("#scriptText").val(scripts[key] || "");
+});
+
+ /* TOOLS SHOW / HIDE */
+$("#toolsToggle").click(()=>{
+ $("#tools").toggleClass("show");
+});
+
+ /* ================= SWIPE TO OPEN / CLOSE TOOLS ================= */
+
+document.addEventListener("touchstart", e=>{
+ touchStartX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e=>{
+ touchEndX = e.changedTouches[0].clientX;
+ handleSwipe();
+});
+
+function handleSwipe(){
+ let diff = touchEndX - touchStartX;
+
+ // 👉 Swipe from LEFT EDGE → OPEN
+ if(
+  touchStartX < SWIPE_EDGE &&
+  diff > SWIPE_MIN
+ ){
+  $("#tools").addClass("show");
+ }
+
+ // 👈 Swipe LEFT → CLOSE (when open)
+ if(
+  $("#tools").hasClass("show") &&
+  diff < -SWIPE_MIN
+ ){
+  $("#tools").removeClass("show");
+ }
+}
+
+/* ================= PROMPTER ONLY FULLSCREEN ================= */
+
+$("#fullscreen").click(()=>{
+ const prompter = document.getElementById("prompter");
+
+ if(!document.fullscreenElement){
+  prompter.requestFullscreen().catch(err=>{
+   console.warn("Fullscreen failed:", err);
+  });
+ }else{
+  document.exitFullscreen();
+ }
+});
+
+</script>
+
+</body>
+</html>

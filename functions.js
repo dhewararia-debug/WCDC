@@ -1,0 +1,1234 @@
+/**
+* 
+*
+* @author amitaryan (https://www.youtube.com/owaschool)
+* @version 1.2.0
+**/
+
+
+/* ===================
+Table Of Content
+======================
+01 PRELOADER
+02 MEGA MENU
+03 STICKY HEADER
+04 TINY SLIDER
+05 STICKY BAR
+06 TOOLTIP
+07 POPOVER
+08 BACK TO TOP
+09 GLIGHTBOX
+10 CHOICES
+11 AOS ANIMATION
+12 QUILL EDITOR
+13 STEPPER
+14 PRICING
+15 STICKY ELEMENT
+16 FLATPICKER
+17 SPLIDE SLIDER
+18 NOUISLIDER
+19 DROPZONE
+20 FAKE PASSWORD
+21 AUTO TAB
+22 GUEST SELECTOR
+23 PARALLAX BACKGROUND
+24 OVERLAY SCROLLBAR
+25 TRAFFIC CHART
+26 TRAFFIC CHART 2
+27 TRAFFIC CHART 3
+28 TRAFFIC CHART 4
+====================== */
+
+let uploadData = {}; 
+
+
+
+"use strict";
+!function () {
+
+    window.Element.prototype.removeClass = function () {
+        let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
+            selectors = this;
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (this.isVariableDefined(selectors) && className) {
+            selectors.classList.remove(className);
+        }
+        return this;
+    }, window.Element.prototype.addClass = function () {
+        let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
+            selectors = this;
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (this.isVariableDefined(selectors) && className) {
+            selectors.classList.add(className);
+        }
+        return this;
+    }, window.Element.prototype.toggleClass = function () {
+        let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
+            selectors = this;
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (this.isVariableDefined(selectors) && className) {
+            selectors.classList.toggle(className);
+        }
+        return this;
+    }, window.Element.prototype.isVariableDefined = function () {
+        return !!this && typeof (this) != 'undefined' && this != null;
+    }
+}();
+
+// Get CSS var value
+var ThemeColor = function () {
+  return {
+    getCssVariableValue: function (e) {
+      var t = getComputedStyle(document.documentElement).getPropertyValue(e);
+      return t && t.length > 0 && (t = t.trim()), t;
+    }
+  };
+}();
+
+var e = {
+    init: function () {
+        e.preLoader(),
+        e.megaMenu(),
+        e.stickyHeader(),
+        e.tinySlider(),
+        e.stickyBar(),
+        e.toolTipFunc(),
+        e.popOverFunc(),
+        e.backTotop(),
+        e.lightBox(),
+        e.choicesSelect(),
+        e.aosFunc(),
+        e.quill(),
+        e.stepper(),
+        e.pricing(),
+        e.chackerShow(),
+        e.stickyElement(),
+        e.flatPicker(),
+        e.splideSlider(),
+        e.rangeSlider(),
+        e.dropZone(),
+        e.fakePwd(),
+        e.autoTabinput(),
+        e.MyApexChart(),
+        e.guestSelector(),
+        e.parallaxBG(),
+        e.overlayScrollbars(),
+        e.OwaUploader(),
+        e.DataTable(),
+        e.newsperpage();
+        
+    },
+    isVariableDefined: function (el) {
+        return typeof !!el && (el) != 'undefined' && el != null;
+    },
+    getParents: function (el, selector, filter) {
+        const result = [];
+        const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+
+        // match start from parent
+        el = el.parentElement;
+        while (el && !matchesSelector.call(el, selector)) {
+            if (!filter) {
+                if (selector) {
+                    if (matchesSelector.call(el, selector)) {
+                        return result.push(el);
+                    }
+                } else {
+                    result.push(el);
+                }
+            } else {
+                if (matchesSelector.call(el, filter)) {
+                    result.push(el);
+                }
+            }
+            el = el.parentElement;
+            if (e.isVariableDefined(el)) {
+                if (matchesSelector.call(el, selector)) {
+                    return el;
+                }
+            }
+
+        }
+        return result;
+    },
+    getNextSiblings: function (el, selector, filter) {
+        let sibs = [];
+        let nextElem = el.parentNode.firstChild;
+        const matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+        do {
+            if (nextElem.nodeType === 3) continue; // ignore text nodes
+            if (nextElem === el) continue; // ignore elem of target
+            if (nextElem === el.nextElementSibling) {
+                if ((!filter || filter(el))) {
+                    if (selector) {
+                        if (matchesSelector.call(nextElem, selector)) {
+                            return nextElem;
+                        }
+                    } else {
+                        sibs.push(nextElem);
+                    }
+                    el = nextElem;
+
+                }
+            }
+        } while (nextElem = nextElem.nextSibling)
+        return sibs;
+    },
+    on: function (selectors, type, listener) {
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!(selectors instanceof HTMLElement) && selectors !== null) {
+                selectors = document.querySelector(selectors);
+            }
+            selectors.addEventListener(type, listener);
+        });
+    },
+    onAll: function (selectors, type, listener) {
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(selectors).forEach((element) => {
+                if (type.indexOf(',') > -1) {
+                    let types = type.split(',');
+                    types.forEach((type) => {
+                        element.addEventListener(type, listener);
+                    });
+                } else {
+                    element.addEventListener(type, listener);
+                }
+
+
+            });
+        });
+    },
+    removeClass: function (selectors, className) {
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (e.isVariableDefined(selectors)) {
+            selectors.removeClass(className);
+        }
+    },
+    removeAllClass: function (selectors, className) {
+        if (e.isVariableDefined(selectors) && (selectors instanceof HTMLElement)) {
+            document.querySelectorAll(selectors).forEach((element) => {
+                element.removeClass(className);
+            });
+        }
+
+    },
+    toggleClass: function (selectors, className) {
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (e.isVariableDefined(selectors)) {
+            selectors.toggleClass(className);
+        }
+    },
+    toggleAllClass: function (selectors, className) {
+        if (e.isVariableDefined(selectors)  && (selectors instanceof HTMLElement)) {
+            document.querySelectorAll(selectors).forEach((element) => {
+                element.toggleClass(className);
+            });
+        }
+    },
+    addClass: function (selectors, className) {
+        if (!(selectors instanceof HTMLElement) && selectors !== null) {
+            selectors = document.querySelector(selectors);
+        }
+        if (e.isVariableDefined(selectors)) {
+            selectors.addClass(className);
+        }
+    },
+    select: function (selectors) {
+        return document.querySelector(selectors);
+    },
+    selectAll: function (selectors) {
+        return document.querySelectorAll(selectors);
+    },
+    newsperpage: function () {
+      var newspage = e.select('.js_newsperpage');
+      
+      if (e.isVariableDefined(newspage)) {
+        $(newspage).bootstrapNews({
+          newsPerPage: 5,              // Number of news items per page
+          autoplay: true,              // Enables automatic scrolling
+          pauseOnHover: true,          // Pauses the ticker on hover
+          direction: "up",             // Scroll direction: "up" or "down"
+          newsTickerInterval: 4000,    // Interval between scrolls (in ms)
+          onToDo: function () { }      // Callback function (empty for now)
+        });
+      }
+    },
+
+
+    // START: 01 Preloader
+    preLoader: function () {
+        window.onload = function () {
+            var preloader = e.select('.preloader');
+            if (e.isVariableDefined(preloader)) {
+                preloader.className += ' animate__animated animate__fadeOut';
+                setTimeout(function(){
+                    preloader.style.display = 'none';
+                }, 200);
+            }
+        };
+    },
+    // END: Preloader
+
+    // START: 02 Mega Menu
+    megaMenu: function () {
+        e.onAll('.dropdown-menu a.dropdown-item.dropdown-toggle', 'click', function (event) {
+            var element = this;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            if (e.isVariableDefined(element.nextElementSibling) && !element.nextElementSibling.classList.contains("show")) {
+                const parents = e.getParents(element, '.dropdown-menu');
+                e.removeClass(parents.querySelector('.show'), "show");
+                if(e.isVariableDefined(parents.querySelector('.dropdown-opened'))){
+                    e.removeClass(parents.querySelector('.dropdown-opened'), "dropdown-opened");
+                }
+
+            }
+            var $subMenu = e.getNextSiblings(element, ".dropdown-menu");
+            e.toggleClass($subMenu, "show");
+            $subMenu.previousElementSibling.toggleClass('dropdown-opened');
+            var parents = e.getParents(element, 'li.nav-item.dropdown.show');
+            if (e.isVariableDefined(parents) && parents.length > 0) {
+                e.on(parents, 'hidden.bs.dropdown', function (event) {
+                    e.removeAllClass('.dropdown-submenu .show');
+                });
+            }
+        });
+    },
+    // END: Mega Menu
+
+    // START: 03 Sticky Header
+    stickyHeader: function () {
+        var stickyNav = e.select('.header-sticky');
+        if (e.isVariableDefined(stickyNav)) {
+            var stickyHeight = stickyNav.offsetHeight;
+            stickyNav.insertAdjacentHTML('afterend', '<div id="sticky-space"></div>');
+            var stickySpace = e.select('#sticky-space');
+            if (e.isVariableDefined(stickySpace)) {
+                document.addEventListener('scroll', function (event) {
+                    var scTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scTop >= 400) {
+                        stickySpace.addClass('active');
+                        e.select("#sticky-space.active").style.height = stickyHeight + 'px';
+                        stickyNav.addClass('header-sticky-on');
+                    } else {
+                        stickySpace.removeClass('active');
+                        stickySpace.style.height = '0px';
+                        stickyNav.removeClass("header-sticky-on");
+                    }
+                });
+            }
+        }
+    },
+    // END: Sticky Header
+
+    // START: 04 Tiny Slider
+    tinySlider: function () {
+        var $carousel = e.select('.tiny-slider-inner');
+        if (e.isVariableDefined($carousel)) {
+          var tnsCarousel = e.selectAll('.tiny-slider-inner');
+          tnsCarousel.forEach(slider => {
+              var slider1 = slider;
+              var sliderMode = slider1.getAttribute('data-mode') ? slider1.getAttribute('data-mode') : 'carousel';
+              var sliderAxis = slider1.getAttribute('data-axis') ? slider1.getAttribute('data-axis') : 'horizontal';
+              var sliderSpace = slider1.getAttribute('data-gutter') ? slider1.getAttribute('data-gutter') : 30;
+              var sliderEdge = slider1.getAttribute('data-edge') ? slider1.getAttribute('data-edge') : 0;
+
+              var sliderItems = slider1.getAttribute('data-items') ? slider1.getAttribute('data-items') : 4; //option: number (items in all device)
+              var sliderItemsXl = slider1.getAttribute('data-items-xl') ? slider1.getAttribute('data-items-xl') : Number(sliderItems); //option: number (items in 1200 to end )
+              var sliderItemsLg = slider1.getAttribute('data-items-lg') ? slider1.getAttribute('data-items-lg') : Number(sliderItemsXl); //option: number (items in 992 to 1199 )
+              var sliderItemsMd = slider1.getAttribute('data-items-md') ? slider1.getAttribute('data-items-md') : Number(sliderItemsLg); //option: number (items in 768 to 991 )
+              var sliderItemsSm = slider1.getAttribute('data-items-sm') ? slider1.getAttribute('data-items-sm') : Number(sliderItemsMd); //option: number (items in 576 to 767 )
+              var sliderItemsXs = slider1.getAttribute('data-items-xs') ? slider1.getAttribute('data-items-xs') : Number(sliderItemsSm); //option: number (items in start to 575 )
+
+              var sliderSpeed = slider1.getAttribute('data-speed') ? slider1.getAttribute('data-speed') : 500;
+              var sliderautoWidth = slider1.getAttribute('data-autowidth') === 'true'; //option: true or false
+              var sliderArrow = slider1.getAttribute('data-arrow') !== 'false'; //option: true or false
+              var sliderDots = slider1.getAttribute('data-dots') !== 'false'; //option: true or false
+
+              var sliderAutoPlay = slider1.getAttribute('data-autoplay') !== 'false'; //option: true or false
+              var sliderAutoPlayTime = slider1.getAttribute('data-autoplaytime') ? slider1.getAttribute('data-autoplaytime') : 4000;
+              var sliderHoverPause = slider1.getAttribute('data-hoverpause') === 'true'; //option: true or false
+              if (e.isVariableDefined(e.select('.custom-thumb'))) {
+                var sliderNavContainer = e.select('.custom-thumb');
+              } 
+              var sliderLoop = slider1.getAttribute('data-loop') !== 'false'; //option: true or false
+              var sliderRewind = slider1.getAttribute('data-rewind') === 'true'; //option: true or false
+              var sliderAutoHeight = slider1.getAttribute('data-autoheight') === 'true'; //option: true or false
+              var sliderAutoWidth = slider1.getAttribute('data-autowidth') === 'true'; //option: true or false
+              var sliderfixedWidth = slider1.getAttribute('data-fixedwidth') === 'true'; //option: true or false
+              var sliderTouch = slider1.getAttribute('data-touch') !== 'false'; //option: true or false
+              var sliderDrag = slider1.getAttribute('data-drag') !== 'false'; //option: true or false
+              // Check if document DIR is RTL
+              var ifRtl = document.getElementsByTagName("html")[0].getAttribute("dir");
+              var sliderDirection;
+              if (ifRtl === 'rtl') {
+                  sliderDirection = 'rtl';
+              }
+
+              var tnsSlider = tns({
+                  container: slider,
+                  mode: sliderMode,
+                  axis: sliderAxis,
+                  gutter: sliderSpace,
+                  edgePadding: sliderEdge,
+                  speed: sliderSpeed,
+                  autoWidth: sliderautoWidth,
+                  controls: sliderArrow,
+                  nav: sliderDots,
+                  autoplay: sliderAutoPlay,
+                  autoplayTimeout: sliderAutoPlayTime,
+                  autoplayHoverPause: sliderHoverPause,
+                  autoplayButton: false,
+                  autoplayButtonOutput: false,
+                  controlsPosition: top,
+                  navContainer: sliderNavContainer,
+                  navPosition: top,
+                  autoplayPosition: top,
+                  controlsText: [
+                      '<i class="fa fa-arrow-left"></i>',
+                      '<i class="fa fa-arrow-right"></i>'
+                  ],
+                  loop: sliderLoop,
+                  rewind: sliderRewind,
+                  autoHeight: sliderAutoHeight,
+                  autoWidth: sliderAutoWidth,
+                  fixedWidth: sliderfixedWidth,
+                  touch: sliderTouch,
+                  mouseDrag: sliderDrag,
+                  arrowKeys: true,
+                  items: sliderItems,
+                  textDirection: sliderDirection,
+                  responsive: {
+                      0: {
+                          items: Number(sliderItemsXs)
+                      },
+                      576: {
+                          items: Number(sliderItemsSm)
+                      },
+                      768: {
+                          items: Number(sliderItemsMd)
+                      },
+                      992: {
+                          items: Number(sliderItemsLg)
+                      },
+                      1200: {
+                          items: Number(sliderItemsXl)
+                      }
+                  }
+              });
+          }); 
+        }
+    },
+    // END: Tiny Slider
+
+    // START: 05 Sticky Bar
+    stickyBar: function () {
+        var sb = e.select('[data-sticky]');
+        if (e.isVariableDefined(sb)) {
+            var sticky = new Sticky('[data-sticky]');
+        }
+    },
+    // END: Sticky Bar
+
+    // START: 06 Tooltip
+    // Enable tooltips everywhere via data-toggle attribute
+    toolTipFunc: function () {
+        var tooltipTriggerList = [].slice.call(e.selectAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    },
+    // END: Tooltip
+
+    // START: 07 Popover
+    // Enable popover everywhere via data-toggle attribute
+    popOverFunc: function () {
+        var popoverTriggerList = [].slice.call(e.selectAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl)
+        })
+    },
+    // END: Popover
+
+    // START: 08 Back to Top
+    backTotop: function () {
+        var scrollpos = window.scrollY;
+        var backBtn = e.select('.back-top');
+        if (e.isVariableDefined(backBtn)) {
+            var add_class_on_scroll = () => backBtn.addClass("back-top-show");
+            var remove_class_on_scroll = () => backBtn.removeClass("back-top-show");
+
+            window.addEventListener('scroll', function () {
+                scrollpos = window.scrollY;
+                if (scrollpos >= 800) {
+                    add_class_on_scroll()
+                } else {
+                    remove_class_on_scroll()
+                }
+            });
+
+            backBtn.addEventListener('click', () => window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            }));
+        }
+    },
+    // END: Back to Top
+    
+   
+    // START: 09 GLightbox
+    lightBox: function () {
+        var light = e.select('[data-glightbox]');
+        if (e.isVariableDefined(light)) {
+            var lb = GLightbox({
+                selector: '*[data-glightbox]',
+                openEffect: 'fade',
+                closeEffect: 'fade'
+            });
+        }
+    },
+    // END: GLightbox
+
+    // START: 10 Choices
+    choicesSelect: function () {
+       var choice = e.select('.js-choice');
+       
+       if (e.isVariableDefined(choice)) {
+         var element = document.querySelectorAll('.js-choice');
+
+         element.forEach(function (item) {
+           var removeItemBtn = item.getAttribute('data-remove-item-button') == 'true' ? true : false;
+           var placeHolder = item.getAttribute('data-placeholder') == 'false' ? false : true;
+           var placeHolderVal = item.getAttribute('data-placeholder-val') ? item.getAttribute('data-placeholder-val') : 'Type and hit enter';
+           var maxItemCount = item.getAttribute('data-max-item-count') ? item.getAttribute('data-max-item-count') : 3;
+           var searchEnabled = item.getAttribute('data-search-enabled') == 'true' ? true : false;
+           var searchName = item.getAttribute('data-search-name') ? item.getAttribute('data-search-name') : 'Search';
+
+           var choices = new Choices(item, {
+               removeItemButton: removeItemBtn,
+               placeholder: placeHolder,
+               placeholderValue: placeHolderVal,
+               maxItemCount: maxItemCount,
+               searchEnabled: searchEnabled,
+               searchPlaceholderValue: searchName,
+               noResultsText: 'No results found',
+               shouldSort: false
+               
+           });
+
+         });
+       }
+    },
+    // END: Choices
+
+    // START: 11 AOS Animation
+    aosFunc: function () {
+        var aos = e.select('.aos');
+        if (e.isVariableDefined(aos)) {
+            AOS.init({
+                duration: 500,
+                easing: 'ease-out-quart',
+                once: true
+            });
+        }
+    },
+    // END: AOS Animation
+
+    // START: 12 Quill Editor
+      quill: function () {
+        var ql = e.select('.quilleditor');
+        if (e.isVariableDefined(ql)) {
+            var element = e.selectAll('.quilleditor');
+            element.forEach(function (item) {
+                var t = item.previousElementSibling;
+                var edt = new Quill(item, {
+                    modules: { toolbar: t },
+                    theme: 'snow'
+                  });
+            });
+        }
+    },
+    // END: Quill Editor
+
+    // START: 13 Stepper
+    stepper: function (step_id = null) {
+        var stp = e.select('#stepper');
+        if (e.isVariableDefined(stp)) {
+          var nxtBtn = document.querySelectorAll('.next-btn');
+          var prvBtn = document.querySelectorAll('.prev-btn');
+
+          var stepper = new Stepper(document.querySelector('#stepper'), {
+            linear: false,
+            animation: true
+          });
+
+          nxtBtn.forEach(function (button) {
+            button.addEventListener("click", () =>{
+            stepper.next()
+          })
+          });
+
+          prvBtn.forEach(function (button) {
+            button.addEventListener("click", () =>{
+            stepper.previous()
+          })
+          });
+
+          if(step_id){
+            stepper.to(step_id);
+          }
+
+
+        }
+    },
+    // END: Stepper
+
+    // START: 14 Pricing
+    pricing: function () {
+        var p = e.select('.price-wrap');
+        if (e.isVariableDefined(p)) {
+          var pWrap = e.selectAll(".price-wrap");
+          pWrap.forEach(item => {
+
+            var priceSwitch = item.querySelector('.price-toggle'),
+            priceElement = item.querySelectorAll('.plan-price');
+
+            priceSwitch.addEventListener('change', function () {
+              if (priceSwitch.checked) {
+                priceElement.forEach(pItem => {
+                  var dd = pItem.getAttribute('data-annual-price');
+                  pItem.innerHTML = dd;
+                });
+              } else {
+                priceElement.forEach(pItem => {
+                  var ee = pItem.getAttribute('data-monthly-price');
+                  pItem.innerHTML = ee;
+                });
+              }
+            });
+          });
+        }
+    },
+    // END: Pricing
+
+    // START: 14 Pricing
+  chackerShow: function () {
+    var p = e.select('.js_chacked_show');
+    if (e.isVariableDefined(p)) {
+        var chacker = e.selectAll(".js_chacked_show");
+        
+        chacker.forEach(item => {
+            item.addEventListener('change', function () {
+                chacker.forEach(innerItem => {
+                    var data_show = innerItem.getAttribute('data-show'),
+                        show_class = document.querySelector('.' + data_show);
+
+                    if (innerItem.checked) {
+                        show_class.classList.remove('display-none'); // show the selected one
+                    } else {
+                        show_class.classList.add('display-none'); // hide others
+                    }
+                });
+            });
+        });
+
+        // Optionally trigger the change event on page load to apply initial visibility
+        chacker.forEach(item => {
+            if (item.checked) {
+                var data_show = item.getAttribute('data-show'),
+                    show_class = document.querySelector('.' + data_show);
+                if (show_class) {
+                    show_class.classList.remove('display-none');
+                }
+            } else {
+                var data_show = item.getAttribute('data-show'),
+                    show_class = document.querySelector('.' + data_show);
+                if (show_class) {
+                    show_class.classList.add('display-none');
+                }
+            }
+        });
+    }
+},
+    // END: Pricing
+
+    // START: 15 Sticky element
+    stickyElement: function () {
+    var scrollpos = window.scrollY;
+    var sp = e.select('.sticky-element');
+    if (e.isVariableDefined(sp)) {
+        var add_class_on_scroll = () => sp.addClass("sticky-element-sticked");
+        var remove_class_on_scroll = () => sp.removeClass("sticky-element-sticked");
+
+        window.addEventListener('scroll', function () {
+            scrollpos = window.scrollY;
+            if (scrollpos >= 800) {
+                add_class_on_scroll()
+            } else {
+                remove_class_on_scroll()
+            }
+        });
+    }
+    },
+    // END: Sticky element
+
+    // START: 16 Flatpicker
+    flatPicker: function () {
+
+      var picker = e.select('.flatpickr');
+      if (e.isVariableDefined(picker)) {
+        var element = e.selectAll('.flatpickr');
+        element.forEach(function (item) {
+          var mode = item.getAttribute('data-mode') == 'multiple' ? 'multiple' : item.getAttribute('data-mode') == 'range' ? 'range' : 'single';
+          var enableTime = item.getAttribute('data-enableTime') == 'true' ? true : false;
+          var noCalendar = item.getAttribute('data-noCalendar') == 'true' ? true : false;
+          var inline = item.getAttribute('data-inline') == 'true' ? true : false;
+          var dateFormat = item.getAttribute('data-date-format') ? item.getAttribute('data-date-format') : item.getAttribute('data-enableTime') == 'true' ? "h:i K" : "d M";
+
+          flatpickr(item, {
+            mode: mode,
+            enableTime: enableTime,
+            noCalendar: noCalendar,
+            inline: inline,
+            animate: "false",
+            position: "top",
+            dateFormat: dateFormat, //Check supported characters here: https://flatpickr.js.org/formatting/
+            disableMobile: "true"
+          });
+
+        });
+      }
+    },
+    // END: Flatpicker
+
+    // START: 17 Splide slider
+    splideSlider: function () {
+      var splide1 = e.select('.splide-main');
+        if (e.isVariableDefined(splide1)) {
+          var secondarySlider = new Splide( '.splide-thumb', {
+              rewind      : true,
+              fixedWidth  : 200,
+              fixedHeight : 120,
+              isNavigation: true,
+              gap         : 10,
+              focus       : 'center',
+              pagination  : false,
+              cover       : true,
+              breakpoints : {
+                  '600': {
+                      fixedWidth  : 150,
+                      fixedHeight : 100,
+                  }
+              }
+          } ).mount();
+
+        // Create the main slider.
+        var primarySlider = new Splide( '.splide-main', {
+            type       : 'fade',
+            heightRatio: 0.5,
+            pagination : false,
+            arrows     : false,
+            autoplay    :true,
+            cover      : true,
+        } );
+        
+        // Set the thumbnails slider as a sync target and then call mount.
+        primarySlider.sync( secondarySlider ).mount();
+
+      }
+    },
+    // END: Splide slider
+
+    // START: 18 noUislider
+    rangeSlider: function () {
+      var rangeSlider = e.select('.noui-slider-range');
+      if (e.isVariableDefined(rangeSlider)) {
+        var rangeSliders = e.selectAll('.noui-slider-range');
+        rangeSliders.forEach(slider => {
+          var nouiMin = parseInt(slider.getAttribute('data-range-min'));
+          var nouiMax = parseInt(slider.getAttribute('data-range-max'));
+          var nouiSelectedMin = parseInt(slider.getAttribute('data-range-selected-min'));
+          var nouiSelectedMax = parseInt(slider.getAttribute('data-range-selected-max'));
+          
+          var rangeText = slider.previousElementSibling;
+          var imin = rangeText.firstElementChild;
+          var imax = rangeText.lastElementChild;
+          var inputs = [imin, imax];
+          
+          noUiSlider.create(slider, {
+              start: [nouiSelectedMin, nouiSelectedMax],
+              connect: true,
+              step: 1,
+              range: {
+                  min: [nouiMin],
+                  max: [nouiMax]
+              }
+          });
+          
+          slider.noUiSlider.on("update", function(values, handle) {
+              inputs[handle].value = values[handle];
+          });
+
+        });
+      }
+    },
+    // END: noUislider
+    OwaUploader: function () {
+      function generateUniqueId() {
+        return 'file_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+      }
+      const u = e.select('.js_fileselector');
+      if (e.isVariableDefined(u)) {
+        const uploader = e.selectAll(".js_fileselector");
+        const default_img = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMi4wLjEsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAzNTIgNDI5LjEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDM1MiA0MjkuMTsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6IzAwNEJCNzt9DQo8L3N0eWxlPg0KPHBhdGggZD0iTTQwOC44LDY2Ljh2MzI3LjRjMCwyNy40LDIyLjgsNDkuOCw1MC4zLDQ5LjhoMjM5LjNjMjcuNSwwLDQ5LjgtMjIuMyw0OS44LTQ5LjhWMTE2Yy0wLjEtMi42LTEuMi01LjItMy4xLTdsLTg4LjktODkuMQ0KCWMtMS45LTEuOS00LjQtMi45LTcuMS0yLjloLTE5MEM0MzEuNiwxNyw0MDguOCwzOS40LDQwOC44LDY2Ljh6IE03MTMuOCwxMDUuOUg2ODNjLTYuMywwLTEyLjQtMi41LTE2LjgtNi45DQoJYy00LjUtNC41LTctMTAuNS02LjktMTYuOHYtMzFMNzEzLjgsMTA1Ljl6IE00MjguOCw2Ni44YzAtMTYuNSwxMy45LTI5LjgsMzAuMy0yOS44aDE4MC4ydjQ1LjFjMCwxMS42LDQuNiwyMi43LDEyLjgsMzENCgljOC4yLDguMiwxOS4zLDEyLjgsMzAuOSwxMi44aDQ1LjF2MjY4LjVjMCwxNi41LTEzLjksMjkuOC0zMC4zLDI5LjhINDU5LjFjLTE2LjYsMC0zMC4zLTEzLjQtMzAuMy0yOS44VjY2Ljh6Ii8+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjc3LjIsMTY2LjlIMTMwLjZjLTUuMSwwLTkuMiw0LjEtOS4yLDkuMnM0LjEsOS4yLDkuMiw5LjJoMTQ2LjVjNS4xLDAsOS4yLTQuMSw5LjItOS4xDQoJQzI4Ni40LDE3MSwyODIuMywxNjYuOSwyNzcuMiwxNjYuOXoiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05My41LDE2Ni45SDY2LjRjLTUuMSwwLTkuMiw0LjEtOS4yLDkuMnM0LjEsOS4yLDkuMiw5LjJoMjcuMWM1LjEsMCw5LjItNC4xLDkuMi05LjJTOTguNiwxNjYuOSw5My41LDE2Ni45eiINCgkvPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI3Ny4yLDI0MC4zSDEzMC42Yy01LjEsMC05LjIsNC4xLTkuMiw5LjJjMCw1LjEsNC4xLDkuMiw5LjIsOS4yaDE0Ni41YzUuMSwwLDkuMi00LjEsOS4yLTkuMQ0KCVMyODIuMywyNDAuNCwyNzcuMiwyNDAuM3oiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05My41LDI0MC4zSDY2LjRjLTUuMSwwLTkuMiw0LjEtOS4yLDkuMmMwLDUuMSw0LjEsOS4yLDkuMiw5LjJoMjcuMWM1LjEsMCw5LjItNC4xLDkuMi05LjINCglDMTAyLjcsMjQ0LjQsOTguNiwyNDAuMyw5My41LDI0MC4zeiIvPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI3Ny4yLDMxMy44SDEzMC42Yy01LjEsMC05LjIsNC4xLTkuMiw5LjJjMCw1LjEsNC4xLDkuMiw5LjIsOS4yaDE0Ni41YzUuMSwwLDkuMi00LjEsOS4yLTkuMQ0KCUMyODYuNCwzMTgsMjgyLjMsMzEzLjgsMjc3LjIsMzEzLjh6Ii8+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOTMuNSwzMTMuOEg2Ni40Yy01LjEsMC05LjIsNC4xLTkuMiw5LjJjMCw1LjEsNC4xLDkuMiw5LjIsOS4yaDI3LjFjNS4xLDAsOS4yLTQuMSw5LjItOS4yDQoJQzEwMi43LDMxNy45LDk4LjYsMzEzLjgsOTMuNSwzMTMuOHoiLz4NCjxnPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNjMsNDEyLjFIODljLTQxLjQsMC03NS0zMy42LTc1LTc1di0yNDVjMC00MS40LDMzLjYtNzUsNzUtNzVoMTQ3LjVjOCwwLDE1LjcsMywyMS42LDguNWw2OSw2My42DQoJCWM2LjksNi4zLDEwLjgsMTUuMywxMC44LDI0Ljd2MjIzLjJDMzM4LDM3OC40LDMwNC40LDQxMi4xLDI2Myw0MTIuMXogTTg5LDM3LjNjLTMwLjIsMC01NC43LDI0LjYtNTQuNyw1NC43djI0NQ0KCQljMCwzMC4yLDI0LjYsNTQuNyw1NC43LDU0LjdoMTc0YzMwLjIsMCw1NC43LTI0LjYsNTQuNy01NC43VjExMy44YzAtMy43LTEuNi03LjMtNC4zLTkuOGwtNjktNjMuNmMtMi4yLTItNS0zLjEtNy45LTMuMUg4OXoiLz4NCjwvZz4NCjwvc3ZnPg0K'; // Placeholder image
+
+        uploader.forEach(item => {
+          const selectedFiles = item.getAttribute('data-selected');
+          const inputName = item.getAttribute('data-name');
+          const uploaderContainer = item.closest('.js_uploaderc');
+          const fileContainer = uploaderContainer.querySelector('.js_btcd-files');
+          const isMultiple = item.hasAttribute('multiple');
+          const fileLimit = isMultiple && $(item).data('limit') ? parseInt($(item).data('limit'), 10) : null;
+
+          if (!uploadData[inputName]) uploadData[inputName] = [];
+
+          // Show preloaded files
+          if (selectedFiles && typeof selectedFiles === 'string' && selectedFiles.trim() !== '') {
+            const filePaths = selectedFiles.split(',').map(path => path.trim());
+            filePaths.forEach(filePath => {
+              const fileName = filePath.split('/').pop();
+              const uploadsPath = typeof window.uploads_path !== 'undefined' ? window.uploads_path : '';
+              const img = filePath.match(/\.(jpg|jpeg|png|gif)$/i) ? uploadsPath + '/' + filePath : default_img;
+
+              const previewHtml = `
+            <div class="js_priview_f bg-info bg-opacity-10 p-2 text-primary w-100 mt-2 d-flex align-items-center justify-content-between" data-file-id="${fileName}">
+              <a href="${uploadsPath}/${filePath}" data-glightbox data-gallery="gallery">
+                <img src="${img}" alt="img" title="${fileName}" data-title="${fileName}" data-type="image">
+              </a>
+              <div>
+                <span title="${fileName}">${fileName}</span><br/>
+                <small>Pre-selected</small>
+                <a class="btn mb-0 ms-2 right-0 btn-primary js_edit_imge btn-xs" href="#">Edit</a>
+              </div>
+              <button type="button" class="btn-close text-reset js_file_removeer" title="Remove This File"></button>
+            </div>`;
+
+              fileContainer.insertAdjacentHTML('beforeend', previewHtml);
+
+              uploadData[inputName].push({
+                pre_name: filePath,
+                id: fileName,
+                file: ''
+              });
+
+              if (!isMultiple) {
+                const iconElem = uploaderContainer.querySelector('.js_uplos_icon');
+                if (iconElem) iconElem.classList.add('display-none');
+              }
+            });
+          }
+
+          // Remove handler
+          fileContainer.addEventListener('click', ev => {
+            if (ev.target.classList.contains('js_file_removeer')) {
+              const previewDiv = ev.target.closest('.js_priview_f');
+              if (previewDiv) {
+                const fileId = previewDiv.getAttribute('data-file-id');
+                previewDiv.remove();
+                uploadData[inputName] = uploadData[inputName].filter(f => f.id !== fileId);
+
+                if (!isMultiple && fileContainer.querySelectorAll('.js_priview_f').length === 0) {
+                  const iconElem = uploaderContainer.querySelector('.js_uplos_icon');
+                  if (iconElem) iconElem.classList.remove('display-none');
+                }
+              }
+            }
+          });
+
+          // File selection
+          item.addEventListener('change', ev => {
+            const files = Array.from(ev.target.files);
+            const acceptAttr = item.getAttribute('accept');
+            const acceptTypes = acceptAttr ? acceptAttr.split(',').map(t => t.trim().toLowerCase()) : [];
+            const maxSizeKB = $(item).data('size') ? parseInt($(item).data('size'), 10) : null;
+
+            if (isMultiple && fileLimit !== null) {
+              const currentCount = uploadData[inputName].length;
+              if (currentCount + files.length > fileLimit) {
+                alert('You can select a maximum of ' + fileLimit + ' files.');
+                files.splice(fileLimit - currentCount);
+              }
+            }
+
+            files.forEach(file => {
+              const fileType = file.type.toLowerCase();
+              const fileName = file.name.toLowerCase();
+              const isAccepted = acceptTypes.length === 0 || acceptTypes.some(type => {
+                return type.startsWith('.') ? fileName.endsWith(type) :
+                  fileType === type || fileType.startsWith(type.replace('/*', ''));
+              });
+
+              if (!isAccepted) {
+                alert('File type not allowed: ' + file.name);
+                return;
+              }
+
+              if (maxSizeKB && file.size > maxSizeKB * 1024) {
+                alert(`File "${file.name}" is too large. Max allowed size is ${maxSizeKB} KB.`);
+                return;
+              }
+
+              const uniqueId = generateUniqueId();
+              const img = file.type.match('image.*') ? URL.createObjectURL(file) : default_img;
+
+              const previewHtml = `
+            <div class="js_priview_f bg-info bg-opacity-10 p-2 text-primary w-100 mt-2 d-flex align-items-center justify-content-between" data-file-id="${uniqueId}">
+              <a href="#" data-glightbox data-gallery="gallery">
+                <img src="${img}" alt="img" title="${file.name}" data-title="${file.name}" data-type="image">
+              </a>
+              <div>
+                <span title="${file.name}">${file.name}</span><br/>
+                <small>New</small>
+                <a class="btn mb-0 ms-2 right-0 btn-primary js_edit_imge btn-xs" href="#">Edit</a>
+              </div>
+              <button type="button" class="btn-close text-reset js_file_removeer" title="Remove This File"></button>
+            </div>`;
+
+              if (!isMultiple) {
+                fileContainer.innerHTML = '';
+                uploadData[inputName] = [];
+                const iconElem = uploaderContainer.querySelector('.js_uplos_icon');
+                if (iconElem) iconElem.classList.add('display-none');
+              }
+
+              fileContainer.insertAdjacentHTML('beforeend', previewHtml);
+              uploadData[inputName].push({
+                pre_name: '',
+                id: uniqueId,
+                file: file
+              });
+            });
+
+            ev.target.value = '';
+          });
+
+          // Optional trigger on click
+          item.addEventListener('click', () => {
+            if (item.tagName !== 'INPUT' || item.type !== 'file') {
+              const fileInput = uploaderContainer?.querySelector('input[type="file"].js_fileselector');
+              if (fileInput) fileInput.click();
+            }
+          });
+
+        });
+      }
+    },
+
+    DataTable: function(){
+      var datatable = e.select('.js_dataTable');
+        // run DataTable
+      if (e.isVariableDefined(datatable)) {
+        $('.js_dataTable').DataTable({
+          language: {
+            processing: __['Processing...'],
+            search: __['Search:'],
+            lengthMenu: __['Show _MENU_ entries'],
+            info: __['Showing _START_ to _END_ of _TOTAL_ entries'],
+            infoEmpty: __['Showing 0 to 0 of 0 entries'],
+            infoFiltered: __['(filtered from _MAX_ total entries)'],
+            infoPostFix: "",
+            loadingRecords: __['Loading...'],
+            zeroRecords: __['No matching records found'],
+            emptyTable: __['No data available in table'],
+            paginate: {
+              first: __['First'],
+              previous: __['Previous'],
+              next: __['Next'],
+              last: __['Last']
+            },
+            aria: {
+              sortAscending: __[': activate to sort column ascending'],
+              sortDescending: __[': activate to sort column descending']
+            }
+          }
+        });
+      }
+    },
+
+    // START: 19 dropzone
+    dropZone: function () {
+      if (e.isVariableDefined(e.select("[data-dropzone]"))) {
+        window.Dropzone.autoDiscover = false;
+
+        // 1. Default Dropzone Initialization
+        if (e.isVariableDefined(e.select(".dropzone-default"))) {
+          e.selectAll(".dropzone-default").forEach((e => {
+            const a = e.dataset.dropzone ? JSON.parse(e.dataset.dropzone) : {},
+              b = {
+                url: '/upload', // Change this URL to your actual image upload code
+                // Fake the file upload, since GitHub does not handle file uploads
+                // and returns a 404
+                // https://docs.dropzone.dev/getting-started/setup/server-side-implementation
+                init: function() {
+                  this.on('error', function(file, errorMessage) {
+                    if (file.accepted) {
+                      var mypreview = document.getElementsByClassName('dz-error');
+                      mypreview = mypreview[mypreview.length - 1];
+                      mypreview.classList.toggle('dz-error');
+                      mypreview.classList.toggle('dz-success');
+                    }
+                  });
+                }
+              },
+              c = {
+                ...b,
+                ...a
+              };
+              new Dropzone(e, c);
+            }));
+        }
+    
+        // 2. Custom cover and list previews Dropzone Initialization
+        if (e.isVariableDefined(e.select(".dropzone-custom"))) {
+          e.selectAll(".dropzone-custom").forEach((d => {
+            const j = d.dataset.dropzone ? JSON.parse(d.dataset.dropzone) : {},
+              o = {
+                addRemoveLinks: true,
+                previewsContainer: d.querySelector(".dz-preview"),
+                previewTemplate: d.querySelector(".dz-preview").innerHTML,
+                url: '/upload', // Change this URL to your actual image upload code
+                // Now fake the file upload, since GitHub does not handle file uploads
+                // and returns a 404
+                // https://docs.dropzone.dev/getting-started/setup/server-side-implementation
+                init: function() {
+                  this.on('error', function(file, errorMessage) {
+                    if (file.accepted) {
+                      var mypreview = document.getElementsByClassName('dz-error');
+                      mypreview = mypreview[mypreview.length - 1];
+                      mypreview.classList.toggle('dz-error');
+                      mypreview.classList.toggle('dz-success');
+                    }
+                  });
+                }
+              },
+              x = {
+                ...o,
+                ...j
+              };
+              d.querySelector(".dz-preview").innerHTML = '';
+              new Dropzone(d, x);
+          }));
+        }
+      }
+    },
+    // END: dropzone
+
+    // START: 20 Fake Password
+    fakePwd: function () {
+      if (e.isVariableDefined(e.select('.fakepassword'))) {
+        var password = document.querySelector('.fakepassword');
+        var toggler = document.querySelector('.fakepasswordicon');
+      
+        var showHidePassword = () => {
+          if (password.type == 'password') {
+            password.setAttribute('type', 'text');
+            toggler.classList.add('fa-eye');
+          } else {
+            toggler.classList.remove('fa-eye');
+            password.setAttribute('type', 'password');
+          }
+        };
+      
+        toggler.addEventListener('click', showHidePassword);
+      }
+    },
+    // END: Fake Password
+
+    // START: 21 Auto tab
+    autoTabinput: function () {
+      var autb = document.getElementsByClassName("autotab")[0];
+      if (e.isVariableDefined(autb)) {
+        autb.onkeyup = function (e) {
+          var target = e.srcElement;
+          var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+          var myLength = target.value.length;
+          if (myLength >= maxLength) {
+            var next = target;
+            while (next = next.nextElementSibling) {
+              if (next == null)
+                break;
+              if (next.tagName.toLowerCase() == "input") {
+                next.focus();
+                break;
+              }
+            }
+          }
+        }
+      }
+    },
+    // END: Auto tab input
+
+    // START: 22 Guest Selector
+    guestSelector: function () {
+      if (e.isVariableDefined(e.select('.guest-selector'))) {
+
+      let adults = 2;
+      let child = 0;
+      let rooms =1;
+      let totalAdults = 2;
+    
+      let selectionResult = document.querySelector('.selection-result');
+    
+      let adultValue = document.querySelector('.adults');
+      let adultAdd = document.querySelector('.adult-add');
+      let adultRemove = document.querySelector('.adult-remove');
+    
+      let childValue = document.querySelector('.child');
+      let childAdd = document.querySelector('.child-add');
+      let childRemove = document.querySelector('.child-remove');
+    
+      let roomValue = document.querySelector('.rooms');
+      let roomAdd = document.querySelector('.room-add');
+      let roomRemove = document.querySelector('.room-remove');
+    
+      function addElement(type){
+        if(type == 'adult'){
+          adults++;
+          totalAdults = adults + child;
+    
+          showElements();
+        }else if(type == 'child'){
+          child = child + 1;
+          console.log(child);
+          totalAdults = adults + child;
+    
+          showElements();
+        }else if(type == 'room'){
+          rooms++;
+          
+          showElements();
+        }
+      }
+    
+      function showElements(){
+        adultValue.innerText = adults;
+        childValue.innerText = child;
+        roomValue.innerText = rooms;
+    
+        let roomText = rooms > 1 ? 'Rooms' : 'Room';
+        let guestText = totalAdults > 1 ? 'Guests': 'Guest';
+    
+        let resultText = totalAdults+' '+guestText+' '+rooms+' '+roomText;
+    
+        selectionResult.setAttribute('value', resultText);
+      }
+    
+      function removeElement(type){
+        if(type == 'adult'){
+          adults = adults > 0 ?  adults - 1 : adults;
+          totalAdults = adults + child;
+    
+          showElements();
+        }else if(type == 'child'){
+          child = child > 0 ? child - 1 : child;
+          totalAdults = adults + child;
+    
+          showElements();
+        }else if(type == 'room'){
+          rooms = rooms > 0 ? rooms - 1 : rooms;
+          
+          showElements();
+        }
+      }
+    
+      adultAdd.addEventListener('click',function(){
+        addElement('adult');
+      });
+    
+      adultRemove.addEventListener('click',function(){
+        removeElement('adult');
+      });
+    
+      childAdd.addEventListener('click',function(){
+        addElement('child');
+      });
+    
+      childRemove.addEventListener('click',function(){
+        removeElement('child');
+      });
+    
+      roomAdd.addEventListener('click',function(){
+        addElement('room');
+      });
+    
+      roomRemove.addEventListener('click',function(){
+        removeElement('room');
+      });
+      }
+    },
+     // END: Guest Selector
+
+     // START: 23 Parallax Background
+    parallaxBG: function () {
+      var parBG = e.select('.bg-parallax');
+      if (e.isVariableDefined(parBG)) {
+          jarallax(e.selectAll('.bg-parallax'), {
+              speed: 0.6
+          });
+      }
+    },
+    // END: Parallax Background
+
+    // START: 24 Overlay scrollbar
+    overlayScrollbars: function () {
+      var os = e.select('.custom-scrollbar');
+      if (os) {
+        document.addEventListener("DOMContentLoaded", function() {
+          var cs = document.querySelectorAll('.custom-scrollbar');
+          cs.forEach(c => {
+              OverlayScrollbars(c, {
+                scrollbars: {
+                  autoHide: 'leave',
+                  autoHideDelay: 200
+                },
+                overflowBehavior : {
+                    x : "visible-hidden",
+                    y : "scroll"
+                }
+               });
+          });
+        });
+      }
+    },
+    // END: Overlay scrollbars
+
+    // START: 25 Traffic Chart
+    MyApexChart: function () {
+      var cpv = e.select('.js_apexChart');
+      if (e.isVariableDefined(cpv)) {
+        var elements = document.querySelectorAll('.js_apexChart');
+        elements.forEach(function (item) {
+          var optionVarName = item.getAttribute('data-trafic');
+          var options = window[optionVarName]; // Resolve global variable by name
+          if (typeof options !== 'undefined') {
+            var chart = new ApexCharts(item, options);
+            chart.render();
+          }
+        });
+      }
+    },
+    // END: Traffic Chart 
+
+
+};
+e.init();

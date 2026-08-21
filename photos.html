@@ -1,0 +1,500 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A4 Photo Collage — Bootstrap 5 Version</title>
+
+
+   <!-- OG-Meta -->
+    <meta property="og:title" content="Mission Shakti Yojna " />
+    <meta property="og:description" content="Mission Shakti Yojna " />
+    <meta property="og:site_name" content="Mission Shakti Yojna" />
+    <meta property="og:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+    <!-- OG-Meta -->
+
+    <!-- Twitter-Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mission Shakti Yojna" />
+    <meta name="twitter:description" content="Mission Shakti Yojna" />
+    <meta name="twitter:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+    <!-- Twitter-Meta -->
+
+  
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+  <!-- END Google Font -->
+
+
+  <!-- Bootstrap 5 -->
+  <link href="https://amitaryan1894.github.io/Amitproject/style.css" rel="stylesheet">
+  <style>
+  :root { --a4-w: 344.4mm; --a4-h: 487.08mm; --gap: 6px; --cols: 3; --margin: 12mm; } body { font-family: system-ui, Segoe UI, Roboto, Arial; color: #222 } /* A4 Preview */ .a4 { width: calc(var(--a4-w) * 0.35); height: calc(var(--a4-h) * 0.35); background: #fff; border: 1px solid #bbb; box-shadow: 0 6px 18px rgba(0, 0, 0, .08); padding: var(--margin); box-sizing: border-box; overflow: hidden; position: relative; } .page-header2 { text-align: center; margin-bottom: 10px } .page-title { font-size: 20px; font-weight: 700 } .page-desc { font-size: 12px; color: #444 } /* Grid */ .grid { display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: var(--gap); height: calc(100% - 56px); } .cell { background: #eee; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #e6e6e6; } .cell img { width: 100%; height: 100% } .fit-fill img { object-fit: fill } .fit-cover img { object-fit: cover } .fit-contain img { object-fit: contain; background: #f6f6f6 } /* Caption */ .caption { position: absolute; left: 6px; right: 6px; bottom: 6px; background: rgba(0, 0, 0, .45); padding: 6px 8px; color: #fff; font-size: 12px; border-radius: 6px; display: none; backdrop-filter: blur(2px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .cell:hover .caption { display: block } .remove-btn { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; background: rgba(0, 0, 0, .6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: .2s; } .cell:hover .remove-btn { opacity: 1 } /* Toast */ .toast-custom { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 10px 16px; border-radius: 8px; display: none; } @media print { body * { visibility: hidden } .a4, .a4 * { visibility: visible } .a4 { position: fixed; left: 0; top: 0; margin: 0; width: 100%; height: 100%; box-shadow: none } }
+  </style>
+</head>
+
+<body>
+  <main>
+
+
+    <!-- Sidebar START -->
+    <nav class="navbar sidebar navbar-expand-xl navbar-light bg-mode" style="z-index: 2000;">
+
+
+      <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
+        id="offcanvasSidebar">
+        <div class="offcanvas-body sidebar-content d-flex flex-column pt-4">
+
+
+          <!-- Sidebar menu START -->
+          <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+            <!-- Menu item -->
+
+            <li class="nav-item"> <a class="nav-link active" href="https://amitaryan1894.github.io/Amitproject/photos.html">photo collage maker</a></li>
+
+            <li class="nav-item"> <a class="nav-link" href="https://amitaryan1894.github.io/Amitproject/index.html">Salary Sheet Generator</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="https://amitaryan1894.github.io/Amitproject/telepromptor.html">Teleprompter for Speach</a></li>
+
+             <li class="nav-item"> <a class="nav-link " href="https://amitaryan1894.github.io/Amitproject/ppt.html">About Mission Shakti</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="https://amitaryan1894.github.io/Amitproject/player.html">Video Player</a></li>
+
+
+          </ul>
+          <!-- Sidebar menu end -->
+
+
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar END -->
+
+
+
+    <div class="page-content">
+
+        <header class="navbar-light header-sticky border-bottom border-2">
+        <nav class="navbar">
+          <div class="container-fluid main-header">
+            <div class="d-flex">
+              <div class="d-grid navbar-expand-xl">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false" aria-label="Toggle navigation" data-bs-auto-close="outside">
+                  <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+              
+              </div>
+              <a class="navbar-brand" href="https://amitaryan1894.github.io/Amitproject/index.html">
+                <img class="navbar-brand-item" style="max-height: 51px;" src="https://amitaryan1894.github.io/Amitproject/logo.jpg" alt="logo" title="Multi Mini Projhets">
+              </a>
+            </div>
+           
+          </div>
+        </nav>
+      </header>
+
+
+      <div class="container-fluid my-3">
+        <div class="row g-4">
+
+          <!-- Controls -->
+          <div class="col-lg-4">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h4 class="mb-3">Create A4 Photo Page</h4>
+
+                <div class="form-floating mb-3">
+                <input type="text" id="titleInput" class="form-control" placeholder="Your Title">
+                <label>Page Title</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                <textarea id="descInput" class="form-control" placeholder="Page Description"rows="2"></textarea>
+                <label>Page Description</label>
+                </div>
+
+                <div class="row g-3 mb-3">
+                  
+                <div class="form-floating col-6">
+                <input type="number" value="2" min="1" max="6" id="colsInput" class="form-control" placeholder="1">
+                <label>Columns</label>
+                </div>
+
+
+                <div class="form-floating col-6">
+                <input type="number" value="6" id="gapInput" class="form-control" placeholder="1">
+                <label>Gap (px)</label>
+                </div>
+                  
+                </div>
+
+                <div class="row g-3 mb-3">
+
+                  <div class="form-floating col-6">
+                <input type="number" value="2" id="marginInput" class="form-control" placeholder="2">
+                <label>Page Margin (mm)</label>
+                </div>
+
+                  <div class="form-floating col-6">
+            <select class="form-select js-choice z-index-9" id="fitMode" data-placeholder="false">
+                <option value="fill">Stretch (Fill)</option>
+                      <option value="cover">Cover (Crop)</option>
+                      <option value="contain">Contain</option>
+            </select>
+            <label for="dir">Image Fit</label>
+          </div>
+
+                 
+                </div>
+
+                <div class="mb-3 mt-3">
+                  <label class="form-label">Add Images</label>
+                  <input type="file" id="fileInput" class="form-control" multiple accept="image/*">
+                </div>
+
+               <div class="form-floating mb-3">
+  <input type="url" id="urlInput" class="form-control" placeholder="https://example.com">
+  <label>QR Code URL (Add to Grid)</label>
+</div>
+
+<button id="addQrBtn" class="btn btn-success btn-sm w-100">
+  ➕ Add QR to Grid
+</button>
+
+
+                <div class="d-flex gap-2">
+                  <button id="btnClear" class="btn btn-secondary btn-sm">Clear</button>
+                  <button id="btnPrint" class="btn btn-primary btn-sm">Print / PDF</button>
+                  <button id="btnUndo" class="btn btn-warning btn-sm d-none">Undo</button>
+                </div>
+
+                <p class="text-muted small mt-2">
+                  Tip: Hover image to delete (×), drag to reorder, click caption to edit.
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="col-lg-8 d-flex justify-content-center">
+            <div class="a4" id="a4">
+              <div class="page-header2">
+                <div class="page-title" id="pageTitle">(Title)</div>
+                <div class="page-desc" id="pageDesc">(Description)</div>
+              </div>
+
+              <div class="grid" id="grid"></div>
+ 
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div id="toast" class="toast-custom"></div>
+      
+      
+      <footer class="bg-dark">
+      
+        <div class="d-lg-flex justify-content-between align-items-center p-3 text-center text-lg-start">
+          <!-- copyright text -->
+          <div class="text-muted text-primary-hover"> Copyrights ©2023 DHEW. Build by <a href="https://www.webestica.com/"
+              class="text-muted">Amit Kumar (DEO)</a>. </div>
+
+        </div>
+      
+      </footer>
+
+      <!-- Bootstrap JS -->
+      <script src="https://amitaryan1894.github.io/Amitproject/bootstrap.bundle.js"></script>
+      <script src="https://amitaryan1894.github.io/Amitproject/functions.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+      
+    </div>
+
+
+
+
+
+  </main>
+
+</body>
+
+</html>
+
+
+
+<script>
+  // State
+  const titleInput = document.getElementById('titleInput');
+  const descInput = document.getElementById('descInput');
+  const colsInput = document.getElementById('colsInput');
+  const gapInput = document.getElementById('gapInput');
+  const marginInput = document.getElementById('marginInput');
+  const fileInput = document.getElementById('fileInput');
+  const grid = document.getElementById('grid');
+  const pageTitle = document.getElementById('pageTitle');
+  const pageDesc = document.getElementById('pageDesc');
+  const fitMode = document.getElementById('fitMode');
+  const btnUndo = document.getElementById('btnUndo');
+  const toast = document.getElementById('toast');
+
+  let images = [];
+  let lastDeleted = null;
+  let dragSrc = null;
+
+  function uid() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  function showToast(message, withUndo = false) {
+    toast.innerHTML = message;
+    toast.style.display = "block";
+
+    if (withUndo) {
+      const btn = document.createElement("button");
+      btn.textContent = "Undo";
+      btn.className = "btn btn-warning btn-sm ms-2";
+      btn.onclick = undoDelete;
+      toast.appendChild(btn);
+    }
+
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.style.display = "none", 3000);
+  }
+
+  function hideToast() {
+    toast.style.display = "none";
+  }
+
+  function render() {
+    document.documentElement.style.setProperty('--cols', colsInput.value);
+    document.documentElement.style.setProperty('--gap', gapInput.value + "px");
+    document.documentElement.style.setProperty('--margin', marginInput.value + "mm");
+
+    grid.innerHTML = "";
+    pageTitle.textContent = titleInput.value || "(Title)";
+    pageDesc.textContent = descInput.value || "";
+
+    grid.classList.remove("fit-fill", "fit-cover", "fit-contain");
+    grid.classList.add("fit-" + fitMode.value);
+
+   images.forEach((obj, idx) => {
+  const cell = document.createElement("div");
+  cell.className = "cell";
+  cell.setAttribute("draggable", "true");
+  cell.dataset.index = idx;
+
+  if (obj.type === "qr") {
+    const wrapper = document.createElement("div");
+    wrapper.style.position = "absolute";
+    wrapper.style.textAlign = "center";
+    wrapper.style.backgroundColor = "#fff";
+    wrapper.style.borderRadius = "6px";
+    wrapper.style.border = "1px solid #000";
+
+    const label = document.createElement("div");
+    label.textContent = "Scan Me";
+    label.style.fontSize = "10px";
+    label.style.color = "#444";
+    label.style.fontWeight = "900";
+    label.style.marginBottom = "-5px";
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 200;
+    canvas.height = 200;
+    canvas.style.padding = "2px";
+    canvas.style.display = "block";
+
+    new QRious({
+      element: canvas,
+      size: 200,
+      value: obj.url
+    });
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(canvas);
+    cell.appendChild(wrapper);
+  } 
+  else {
+    const img = document.createElement("img");
+    img.src = obj.src;
+    cell.appendChild(img);
+  }
+
+  const remove = document.createElement("div");
+  remove.className = "remove-btn";
+  remove.innerHTML = "×";
+  remove.onclick = () => deleteImage(idx);
+
+  cell.appendChild(remove);
+  addDragHandlers(cell);
+  grid.appendChild(cell);
+});
+
+
+    autoFixSpacing(parseInt(colsInput.value));
+  }
+
+  function deleteImage(idx) {
+    lastDeleted = { item: images[idx], index: idx };
+    images.splice(idx, 1);
+    render();
+    btnUndo.classList.remove("d-none");
+    showToast("Image Removed", true);
+  }
+
+  function undoDelete() {
+    if (lastDeleted) {
+      images.splice(lastDeleted.index, 0, lastDeleted.item);
+      lastDeleted = null;
+      render();
+      btnUndo.classList.add("d-none");
+    }
+  }
+
+  function editCaption(idx, capEl) {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "form-control form-control-sm";
+    input.value = images[idx].caption;
+    capEl.replaceWith(input);
+    input.focus();
+
+    input.addEventListener("blur", () => {
+      images[idx].caption = input.value;
+      render();
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") input.blur();
+    });
+  }
+
+  function autoFixSpacing(cols) {
+    const items = grid.querySelectorAll(".cell");
+    const total = items.length;
+    items.forEach(i => i.style.gridColumn = "");
+
+    if (total === 0) return;
+
+    if (total < cols) {
+      items[total - 1].style.gridColumn = "1 / -1";
+      return;
+    }
+
+    const rem = total % cols;
+    if (rem === 0) return;
+
+    const span = cols - (rem - 1);
+    if (span > 1) {
+      items[total - 1].style.gridColumn = `span ${span}`;
+    }
+  }
+
+  function addDragHandlers(el) {
+    el.addEventListener("dragstart", (e) => {
+      dragSrc = el;
+      e.dataTransfer.effectAllowed = "move";
+    });
+
+    el.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      el.style.outline = "2px dashed #007bff";
+    });
+
+    el.addEventListener("dragleave", () => {
+      el.style.outline = "";
+    });
+
+    el.addEventListener("drop", (e) => {
+      e.preventDefault();
+      el.style.outline = "";
+      const from = parseInt(dragSrc.dataset.index);
+      const to = parseInt(el.dataset.index);
+      const moved = images.splice(from, 1)[0];
+      images.splice(to, 0, moved);
+      render();
+    });
+  }
+
+  fileInput.addEventListener("change", (e) => {
+    const files = [...e.target.files];
+    let done = 0;
+
+    files.forEach(f => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        images.push({ id: uid(), src: ev.target.result, caption: "", name: f.name });
+        done++;
+        if (done === files.length) render();
+      };
+      reader.readAsDataURL(f);
+    });
+
+    fileInput.value = "";
+  });
+
+  document.getElementById("btnClear").onclick = () => {
+    if (confirm("Clear all images?")) {
+      images = [];
+      render();
+    }
+  };
+
+  document.getElementById("btnPrint").onclick = () => window.print();
+
+  [titleInput, descInput, colsInput, gapInput, marginInput, fitMode]
+    .forEach(el => el.addEventListener("input", render));
+
+  render();
+</script>
+
+<script>
+addQrBtn.addEventListener("click", () => {
+  const url = urlInput.value.trim();
+  if (!url) {
+    alert("Please enter a URL");
+    return;
+  }
+
+  images.push({
+    id: uid(),
+    type: "qr",
+    url: url,
+    caption: "For more Detail Scan Me "
+  });
+
+  urlInput.value = "";
+  render();
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

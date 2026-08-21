@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Salary Creator — by amit dhew araira</title>
+
+
+  <!-- OG-Meta -->
+  <meta property="og:title" content="Mission Shakti Yojna " />
+  <meta property="og:description" content="Mission Shakti Yojna " />
+  <meta property="og:site_name" content="Mission Shakti Yojna" />
+  <meta property="og:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+  <!-- OG-Meta -->
+
+  <!-- Twitter-Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mission Shakti Yojna" />
+  <meta name="twitter:description" content="Mission Shakti Yojna" />
+  <meta name="twitter:image" content="https://amitaryan1894.github.io/Amitproject/og-image.jpg" />
+  <!-- Twitter-Meta -->
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="./choices.min.css" rel="stylesheet">
+  <link href="./flatpickr.min.css" rel="stylesheet">
+  <link href="./tagsinput.css" rel="stylesheet">
+  <link href="./style.css" rel="stylesheet">
+
+
+  <style>
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+  
+      .a4,
+      .a4 * {
+        visibility: visible !important;
+      }
+
+      .a4 {
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        background: white;
+        padding: 0;
+        margin: 0;
+        width: 51.3cm;
+        min-height: 37cm;
+        box-shadow: none !important;
+      }
+    }
+
+       p {margin: 0;}
+
+    table {
+      width: auto !important;
+      table-layout: auto;
+      white-space: nowrap;
+    }
+
+    th,
+    td {
+      width: 1%;
+      white-space: nowrap;
+    }
+
+    .fs_amt {
+      font-size: 20px;
+    }
+
+    .emp-name-cell {
+      position: relative;
+    }
+
+    .row-actions {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      display: none;
+      gap: 4px;
+    }
+
+    .emp-name-cell:hover .row-actions {
+      display: flex;
+    }
+
+    .row-actions .btn {
+      padding: 2px 6px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .calcu-enable .calcu {
+      display: none !important;
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <main>
+
+
+    <!-- Sidebar START -->
+    <nav class="navbar sidebar navbar-expand-xl navbar-light bg-mode" style="z-index: 2000;">
+
+
+      <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
+        id="offcanvasSidebar">
+        <div class="offcanvas-body sidebar-content d-flex flex-column pt-4">
+
+
+          <!-- Sidebar menu START -->
+          <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+            <!-- Menu item -->
+
+            <li class="nav-item"> <a class="nav-link " href="./photos.html">photo collage maker</a></li>
+
+            <li class="nav-item"> <a class="nav-link active" href="./index.html">Salary Sheet Generator</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="./telepromptor.html">Teleprompter for Speach</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="./ppt.html">About Mission Shakti</a></li>
+
+            <li class="nav-item"> <a class="nav-link " href="./player.html">Video Player</a></li>
+
+             <li class="nav-item"> <a class="nav-link " href="./form.html">forms</a></li>
+
+             <li class="nav-item"> <a class="nav-link " href="./form2.html">forms2</a></li>
+
+
+          </ul>
+          <!-- Sidebar menu end -->
+
+
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar END -->
+
+
+    <div class="page-content">
+
+      <header class="navbar-light header-sticky border-bottom border-2">
+        <nav class="navbar">
+          <div class="container-fluid main-header">
+            <div class="d-flex">
+              <div class="d-grid navbar-expand-xl">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-expanded="false"
+                  aria-label="Toggle navigation" data-bs-auto-close="outside">
+                  <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </button>
+
+              </div>
+              <a class="navbar-brand" href="./index.html">
+                <img class="navbar-brand-item" style="max-height: 51px;" src="./logo.jpg" alt="logo"
+                  title="Multi Mini Projhets">
+              </a>
+            </div>
+
+          </div>
+        </nav>
+      </header>
+
+      <div class="container-fluid">
+        <div class="d-flex gap-3 flex-wrap align-items-center mb-3 mt-4">
+          <button class="btn btn-primary mb-3" id="btnAdd">Add Employee</button>
+          <button class="btn btn-success mb-3" onclick="window.print()">Print</button>
+          <button class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#settingsModal">Settings</button>
+        </div>
+
+
+        <div class="overflow-scroll w-100">
+          <div class="a4">
+            <h2 class="mb-4 text-center">DHEW Salary Table Sheet Creator</h2>
+            <table class="table table-bordered text-center mb-0" id="empTable">
+
+              <thead>
+
+                <tr>
+                  <th>#</th>
+                  <th>Name Of Employee </br> (Designation)</th>
+                  <th>Month/2026</th>
+                  <th><small class="calcu">Basic Salary x [Duration]</small> </br> = Total </th>
+                  <th>EPF@12%</th>
+                  <th>ESIC@0.75%</th>
+                  <th>EPF@13%</th>
+                  <th>ESIC@3.25%</th>
+                  <th>Total </br> Deduction</th>
+                  <th>Net Salary </br> Payable</th>
+                  <th>Total Approved </br> Salary</th>
+                  <th>Account Number </br> ( IFSC Code )</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <span class="round_note display-none ms-7">Note: Total Amount is Rounded To The Nearest Rupee.</span>
+
+            <div class="row mt-8 text-center">
+              <div class="col-4 sig_2 fw-bold"></div>
+              <div class="col-4 sig_3 fw-bold"></div>
+              <div class="col-4 sig_1 fw-bold"></div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <!-- Add / Edit Modal -->
+        <div class="modal fade" id="empModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-sm-down">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Employee Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <form id="empForm">
+                  <input type="hidden" id="editIndex" />
+
+                  <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="name" autocomplete="off">
+                    <label for="name">Employee Name</label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="designation" autocomplete="off">
+                    <label for="designation">Designation</label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="number" class="form-control" id="salary" autocomplete="off">
+                    <label for="salary">Basic Salary</label>
+                  </div>
+
+
+                  <div class="form-floating mb-2">
+                    <input type="text" id="date_from" class="form-control flatpickr" value=""
+                      placeholder="Enter From Date " data-date-format="d-M-Y">
+                    <label class="form-label">From Due Date<span class="text-danger">*</span></label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="text" id="date_to" class="form-control flatpickr" value="" placeholder="Enter To Date "
+                      data-date-format="d-M-Y">
+                    <label class="form-label">From Due Date<span class="text-danger">*</span></label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="number" class="form-control" id="absent" autocomplete="off">
+                    <label for="absent">Total Absent Days</label>
+                  </div>
+
+
+
+                  <div
+                    class="form-check form-switch form-check-md d-flex justify-content-between p-2 border bg-warning mb-2">
+                    <label class="form-check-label ps-0 pe-4 text-black" for="deduction_on">Deduction ON</label>
+                    <input class="form-check-input flex-shrink-0" type="checkbox" id="deduction_on" checked>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="account" autocomplete="off">
+                    <label for="account">Account Number</label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="ifsc" autocomplete="off">
+                    <label for="ifsc">IFSC Code</label>
+                  </div>
+
+                  <div class="form-floating mb-2">
+                    <input type="text" class="form-control" id="remarks" autocomplete="off">
+                    <label for="remarks">Remarks</label>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="saveEmp">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div class="modal fade" id="settingsModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <!-- Title Change -->
+                <div class="form-floating mb-3">
+                  <input type="text" id="site_title" class="form-control">
+                  <label>Page Title</label>
+                </div>
+
+
+                <!-- ESIC Salary Limit -->
+                <div class="form-floating mb-3">
+                  <input type="number" id="esic_limit" class="form-control">
+                  <label>Minimum Salary for ESIC (Default: 21000)</label>
+                </div>
+
+                <!-- month Days for calculate per days salary -->
+                <div class="form-floating mb-3">
+                  <input type="number" id="month_days" class="form-control">
+                  <label>Total Days in Current Month</label>
+                </div>
+
+
+                <!-- Rounding Setting -->
+                <div
+                  class="form-check form-switch form-check-md d-flex justify-content-between p-2 border bg-warning mb-2">
+                  <label class="form-check-label ps-0 pe-4 text-black" for="round_enable">Enable Round Amount</label>
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="round_enable" checked>
+                </div>
+
+                <!-- Rounding Setting -->
+                <div
+                  class="form-check form-switch form-check-md d-flex justify-content-between p-2 border bg-warning mb-2">
+                  <label class="form-check-label ps-0 pe-4 text-black" for="calculation_enable">Hide Calculation</label>
+                  <input class="form-check-input flex-shrink-0" type="checkbox" id="calculation_enable" checked>
+                </div>
+
+
+                <!-- signature Change -->
+                <div class="border bg-warning p-2 rounded-2">
+                  <span class="text-dark">Verified Officers Name (use * for next line)</span>
+                  <input type="text" id="signature" style="display: none;" data-role="tagsinput" />
+                </div>
+
+
+
+
+
+
+
+
+
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="saveSettings">Save Settings</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Bootstrap JS -->
+        <script src="./jquery.min.js"></script>
+
+        <script src="./bootstrap.bundle.js"></script>
+
+        <script src="./flatpickr.min.js"></script>
+
+        <script src="./choices.min.js"></script>
+
+        <script src="./tagsinput.js"></script>
+
+        <script src="./functions.js"></script>
+
+        <script>
+          $(document).ready(function () {
+
+            /*---------------------------------------------------------
+              DEFAULT SETTINGS  (saved in localStorage)
+            ----------------------------------------------------------*/
+            let settings = {
+              round: false,
+              calculation_enable: false,
+              esic_limit: 21000,
+              month_days: 30,
+              title: "DHEW Salary Table Sheet Creator",
+              signature: ""
+            };
+
+            if (localStorage.getItem("settings")) {
+              settings = JSON.parse(localStorage.getItem("settings"));
+            }
+
+            // Apply Title
+            $("h2.text-center").html(val(settings.title));
+
+
+
+            /*---------------------------------------------------------
+              Utility Functions
+            ----------------------------------------------------------*/
+            function val(x) {
+              if (!x) return "";
+              return String(x).replace(/\*/g, "</br>");
+            }
+            function valPair(a, b) { return (!a && !b) ? "" : `${val(a)} </br>( ${val(b)} )`; }
+
+            // Apply rounding only if enabled in settings
+            function applyRound(value) {
+              value = parseFloat(value) || 0;
+              return settings.round ? Math.round(value) : value;
+            }
+
+
+            // Format amount function with ROUND setting applied
+            function formatAmt(amount, returnNumber = false) {
+              amount = parseFloat(amount) || 0;
+
+              if (settings.round) {
+                amount = Math.round(amount);
+              }
+
+              return returnNumber
+                ? amount
+                : "₹" + amount.toLocaleString('en-IN', {
+                  minimumFractionDigits: settings.round ? 0 : 2,
+                  maximumFractionDigits: settings.round ? 0 : 2
+                });
+            }
+
+            function toggleRoundNote() {
+              if (settings.round === true) {
+                $(".round_note").removeClass("display-none");
+              } else {
+                $(".round_note").addClass("display-none");
+              }
+            }
+            toggleRoundNote();
+
+            function saveEmployees() {
+              localStorage.setItem("employees", JSON.stringify(employees));
+            }
+
+            function renderSignatures() {
+              let tags = $('#signature').tagsinput('items');
+              // Clear previews
+              $('.sig_1, .sig_2, .sig_3').html('');
+
+              tags.forEach((txt, i) => {
+                if (i > 2) return;
+                // Replace * with <br>
+                $('.sig_' + (i + 1)).html(val(txt));
+              });
+            }
+
+
+            /*---------------------------------------------------------
+              Default Employees
+            ----------------------------------------------------------*/
+            let employees = [
+              { name: "Soheb Rumi", designation: "District Mission Co-Ordinator", salary: 40000, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+              { name: "Anuj Ranjan", designation: "Gender Specialist", salary: 23000, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+              { name: "Vikash Kumar", designation: "F.L.E", salary: 21000, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+              { name: "Amit Shrivastava", designation: "Account Assistant", salary: 16000, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+              { name: "Amit Kumar", designation: "Data Entry Operator", salary: 13500, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+              { name: "Aashish Kumar", designation: "Multi Tasking Staff", salary: 12000, deduction_on: '1', date_from: "01-Mar-2025", date_to: "31-Mar-2025" },
+
+            ];
+
+            if (localStorage.getItem("employees")) {
+              try {
+                employees = JSON.parse(localStorage.getItem("employees"));
+              } catch (e) {
+                employees = [];
+              }
+            }
+
+            const $empTable = $("#empTable tbody");
+            const empModal = new bootstrap.Modal(document.getElementById('empModal'));
+
+
+            /*---------------------------------------------------------
+              Calculate Total Row Values
+            ----------------------------------------------------------*/
+            function calculateTotals() {
+
+              let totals = {
+                salary: 0,
+                e_epf: 0,
+                e_esic: 0,
+                g_epf: 0,
+                g_esic: 0,
+                deduction: 0,
+                net: 0,
+                approved: 0
+              };
+
+              employees.forEach(emp => {
+
+                let salary = parseFloat(emp.salary) || 0;
+                let absent = parseFloat(emp.absent) || 0;
+
+                let duration = getDuration(emp.date_from, emp.date_to);
+                if (!duration) return;
+
+                let perDaySalary = salary / settings.month_days;
+
+                /* ================= SALARY ================= */
+                let salary_amt =
+                  (salary * duration.months) +
+                  (perDaySalary * duration.days) -
+                  (perDaySalary * absent);
+
+                salary_amt = Math.max(0, salary_amt);
+
+                /* ================= EPF ================= */
+                let epf_emp = emp.deduction_on == "1" ? salary * 0.12 : 0;
+                let epf_org = emp.deduction_on == "1" ? salary * 0.13 : 0;
+
+                let epf_emp_amt =
+                  (epf_emp * duration.months) +
+                  (epf_emp / settings.month_days * duration.days) -
+                  (epf_emp / settings.month_days * absent);
+
+                let epf_org_amt =
+                  (epf_org * duration.months) +
+                  (epf_org / settings.month_days * duration.days) -
+                  (epf_org / settings.month_days * absent);
+
+                /* ================= ESIC ================= */
+                let esicEligible =
+                  emp.deduction_on == "1" &&
+                  salary <= settings.esic_limit;
+
+                let esic_emp = esicEligible ? salary * 0.0075 : 0;
+                let esic_org = esicEligible ? salary * 0.0325 : 0;
+
+                let esic_emp_amt =
+                  (esic_emp * duration.months) +
+                  (esic_emp / settings.month_days * duration.days) -
+                  (esic_emp / settings.month_days * absent);
+
+                let esic_org_amt =
+                  (esic_org * duration.months) +
+                  (esic_org / settings.month_days * duration.days) -
+                  (esic_org / settings.month_days * absent);
+
+                /* ================= TOTALS ================= */
+                let deduction_amt = formatAmt(epf_emp_amt, true) + formatAmt(epf_org_amt, true) + formatAmt(esic_emp_amt, true) + formatAmt(esic_org_amt, true);
+                let net_amt = formatAmt(salary_amt, true) - formatAmt(epf_emp_amt, true) - formatAmt(esic_emp_amt, true);
+                let approved_amt = formatAmt(salary_amt, true) + formatAmt(epf_org_amt, true) + formatAmt(esic_org_amt, true);
+
+                totals.salary += settings.round ? Math.round(salary_amt) : salary_amt;
+                totals.e_epf += settings.round ? Math.round(epf_emp_amt) : epf_emp_amt;
+                totals.e_esic += settings.round ? Math.round(esic_emp_amt) : esic_emp_amt;
+                totals.g_epf += settings.round ? Math.round(epf_org_amt) : epf_org_amt;
+                totals.g_esic += settings.round ? Math.round(esic_org_amt) : esic_org_amt;
+                totals.deduction += settings.round ? Math.round(deduction_amt) : deduction_amt;
+                totals.net += settings.round ? Math.round(net_amt) : net_amt;
+                totals.approved += settings.round ? Math.round(approved_amt) : approved_amt;
+
+              });
+
+              return totals;
+            }
+
+
+            function parseDMY(dateStr) {
+              if (!dateStr) return null;
+
+              let [d, m, y] = dateStr.split("-");
+
+              let monthMap = {
+                Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+                Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+              };
+
+              return new Date(parseInt(y), monthMap[m], parseInt(d));
+            }
+
+
+            /*---------------------------------------------------------
+              Format Month Column
+            ----------------------------------------------------------*/
+            function formatMonthColumn(from, to) {
+              if (!from) return "";
+              let start = parseDMY(from);
+              let end = to ? parseDMY(to) : null;
+
+
+              const lastDay = d => new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+              const MY = d => d.toLocaleString('default', { month: 'short', year: 'numeric' });
+              const DMY = d => `${String(d.getDate()).padStart(2, '0')}-${d.toLocaleString('default', { month: 'short' })}-${d.getFullYear()}`;
+
+              if (!end) {
+                if (start.getDate() === 1 || start.getDate() === lastDay(start)) return MY(start);
+                return DMY(start);
+              }
+
+              if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+                if (start.getDate() === 1 && end.getDate() === lastDay(end)) return MY(start);
+                if (start.getDate() === 1) return `${MY(start)} - ${DMY(end)}`;
+                if (end.getDate() === lastDay(end)) return `${DMY(start)} - ${DMY(end)}`;
+                return `${DMY(start)} </br>to</br ${DMY(end)}`;
+              }
+
+              let s = start.getDate() === 1 ? MY(start) : DMY(start);
+              let e = end.getDate() === lastDay(end) ? MY(end) : DMY(end);
+              return `${s}</br>to</br>${e}`;
+            }
+
+
+            /*---------------------------------------------------------
+              Duration Display
+            ----------------------------------------------------------*/
+            function getDuration(from, to) {
+
+              let t_due = {
+                months: 0,
+                days: 0
+              };
+
+
+              if (!from || !to) return "";
+
+              let start = parseDMY(from);
+              let end = parseDMY(to);
+
+              if (!start || !end || end < start) return "";
+
+              let sY = start.getFullYear();
+              let sM = start.getMonth();
+              let sD = start.getDate();
+
+              let eY = end.getFullYear();
+              let eM = end.getMonth();
+              let eD = end.getDate();
+
+              let months = (eY - sY) * 12 + (eM - sM);
+              let days = eD - sD + 1;   // ✅ FIX HERE
+
+              if (days <= 0) {
+                months -= 1;
+                let prevMonthLastDay = new Date(eY, eM, 0).getDate();
+                days += prevMonthLastDay;
+              }
+
+              let startIsFirst = sD === 1;
+              let endIsLast = eD === new Date(eY, eM + 1, 0).getDate();
+
+              if (startIsFirst && endIsLast) {
+                months += 1;
+                days = 0;
+              }
+              t_due.months = months;
+              t_due.days = days;
+
+              return t_due;
+
+
+              //  return days === 0 ? `${months} Month(s)` : `${months} Month(s) & ${days} Day(s)`;
+            }
+
+            /*---------------------------------------------------------
+              Check Empty Column
+            ----------------------------------------------------------*/
+            function isColumnEmpty(colIndex) {
+              let empty = true;
+
+              $("#empTable tbody tr").each(function () {
+                let text = $(this).find("td").eq(colIndex).text().trim();
+
+                // Convert to number
+                let num = parseFloat(text.replace(/[^\d.-]/g, ''));
+
+                // Non-zero numbers = column NOT empty
+                if (!isNaN(num) && num > 0) empty = false;
+
+                // Text content also means NOT empty
+                if (isNaN(num) && text !== "") empty = false;
+              });
+
+              return empty;
+            }
+
+            /*---------------------------------------------------------
+              Render Table
+            ----------------------------------------------------------*/
+            function renderTable() {
+
+              $empTable.empty();
+              if (employees.length === 0) return;
+
+              /* ================= EMPLOYEE ROWS ================= */
+              employees.forEach((emp, index) => {
+
+                let salary = parseFloat(emp.salary) || 0;
+
+                let duration = getDuration(emp.date_from, emp.date_to);
+
+
+                // Default absent to 0 if empty
+                if (!emp.absent) emp.absent = 0;
+
+                // Calculate salary considering absent days
+                let perDaySalary = salary / settings.month_days;
+                let salary_amt = (salary * duration.months) + (perDaySalary * duration.days) - (perDaySalary * emp.absent);
+
+                let esicEligible = emp.deduction_on == "1" && salary <= settings.esic_limit;
+
+
+                let epf_emp = emp.deduction_on == "1" ? salary * 0.12 : 0;
+                let epf_org = emp.deduction_on == "1" ? salary * 0.13 : 0;
+
+                let esic_emp = esicEligible ? salary * 0.0075 : 0;
+                let esic_org = esicEligible ? salary * 0.0325 : 0;
+
+                let epf_emp_amt = emp.deduction_on == "1" ? (salary_amt * 0.12) : 0;
+                let epf_org_amt = emp.deduction_on == "1" ? (salary_amt * 0.13) : 0;
+                let esic_emp_amt = (emp.deduction_on == "1" && esicEligible) ? (salary_amt * 0.0075) : 0;
+                let esic_org_amt = (emp.deduction_on == "1" && esicEligible) ? (salary_amt * 0.0325) : 0;
+
+                let deduction_amt = formatAmt(epf_emp_amt, true) + formatAmt(epf_org_amt, true) + formatAmt(esic_emp_amt, true) + formatAmt(esic_org_amt, true);
+                let net_amt = formatAmt(salary_amt, true) - formatAmt(epf_emp_amt, true) - formatAmt(esic_emp_amt, true);
+                let approved_amt = formatAmt(salary_amt, true) + formatAmt(epf_org_amt, true) + formatAmt(esic_org_amt, true);
+
+
+                let row = $(`
+            <tr>
+                <td>${index + 1}</td>
+                <td class="emp-name-cell position-relative">
+                 <span class="fw-bold">  ${val(emp.name).toUpperCase()} </span><br><small>(${val(emp.designation)})</small>
+                   <div class="row-actions">
+                    <button class="btn btn-sm btn-warning edit-btn" data-index="${index}">Edit</button>
+                    <button class="btn btn-sm btn-danger delete-btn" data-index="${index}">Delete</button>
+                  </div>
+                </td>
+
+                <td>${formatMonthColumn(emp.date_from, emp.date_to)}</td>
+
+                <td>
+                  <small class="calcu">
+                    ${formatAmt(salary)} x 
+                    [ ${duration.months > 0 ? duration.months + ' Month' + (duration.months > 1 ? 's' : '') : ''}] + [ ${duration.days > 0 ? duration.days + ' Day' + (duration.days > 1 ? 's' : '') : ''}] ${emp.absent > 0 ? `<p> − ${formatAmt((salary / settings.month_days) * emp.absent)} [${emp.absent} Day${emp.absent > 1 ? 's' : ''} Absent]` : ``} </p> </small> 
+                 
+                     
+                 <span class="fs_amt"> = ${formatAmt(salary_amt)}</span>
+                </td>
+
+
+                <td><span class="fs_amt">${formatAmt(epf_emp_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(esic_emp_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(epf_org_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(esic_org_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(deduction_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(net_amt)}</span></td>
+                <td><span class="fs_amt">${formatAmt(approved_amt)}</span></td>
+
+                <td>${valPair(emp.account, emp.ifsc)}</td>
+                <td>${val(emp.remarks)}</td>
+            </tr>
+        `);
+
+                $empTable.append(row);
+              });
+
+
+              /* ================= TOTAL ROW (PERFECT ALIGNMENT) ================= */
+              let t = calculateTotals();
+              let totalRow = $("<tr style='background:#f2f2f2;font-weight:bold;font-size: 22px;'></tr>");
+
+              $("#empTable thead th").each(function (i) {
+
+                let cell = "";
+
+                switch (i) {
+                  case 0: cell = ""; break;
+                  case 1: cell = "--TOTAL--"; break;
+                  case 2: cell = ""; break;
+
+                  case 3: cell = formatAmt(t.salary); break;
+                  case 4: cell = formatAmt(t.e_epf); break;
+                  case 5: cell = formatAmt(t.e_esic); break;
+                  case 6: cell = formatAmt(t.g_epf); break;
+                  case 7: cell = formatAmt(t.g_esic); break;
+                  case 8: cell = formatAmt(t.deduction); break;
+                  case 9: cell = formatAmt(t.net); break;
+                  case 10: cell = formatAmt(t.approved); break;
+
+                  default: cell = "";
+                }
+
+                totalRow.append(`<td>${cell}</td>`);
+              });
+
+              $empTable.append(totalRow);
+
+
+              /* ================= HIDE EMPTY COLUMNS ================= */
+              $("#empTable thead th").each(function (c) {
+
+                let hide = isColumnEmpty(c);
+
+                $(this).toggle(!hide);
+
+                $empTable.find("tr").each(function () {
+                  $(this).find("td").eq(c).toggle(!hide);
+                });
+              });
+            }
+
+            /*---------------------------------------------------------
+              Add / Edit / Delete Employee
+            ----------------------------------------------------------*/
+            $("#btnAdd").click(function () {
+              $("#empForm")[0].reset();
+              $("#editIndex").val("");
+              empModal.show();
+            });
+
+            $("#saveEmp").click(function (e) {
+              e.preventDefault();
+
+              let idx = $("#editIndex").val();
+
+              let data = {
+                name: val($("#name").val()),
+                designation: val($("#designation").val()),
+                salary: parseFloat($("#salary").val()) || 0,
+                date_from: val($("#date_from").val()),
+                date_to: val($("#date_to").val()),
+                absent: val($("#absent").val()),
+                deduction_on: $("#deduction_on").prop("checked") ? '1' : '0',
+                account: val($("#account").val()),
+                ifsc: val($("#ifsc").val()),
+                remarks: val($("#remarks").val())
+              };
+
+              if (idx === "") {
+                employees.push(data);
+              } else {
+                employees[idx] = data;
+              }
+
+              saveEmployees();   // ✅ SAVE HERE
+              empModal.hide();
+              renderTable();
+            });
+
+
+            $empTable.on("click", ".edit-btn", function () {
+              let i = $(this).data("index");
+              let e = employees[i];
+
+              $("#name").val(e.name);
+              $("#designation").val(e.designation);
+              $("#salary").val(e.salary);
+              $("#date_from").val(e.date_from);
+              $("#date_to").val(e.date_to);
+              $("#absent").val(e.absent);
+              $("#deduction_on").prop("checked", e.deduction_on == '1');
+              $("#account").val(e.account);
+              $("#ifsc").val(e.ifsc);
+              $("#remarks").val(e.remarks);
+
+              $("#editIndex").val(i);
+              empModal.show();
+            });
+
+            $empTable.on("click", ".delete-btn", function () {
+              let idx = $(this).data("index");
+              if (confirm("Are you sure?")) {
+                employees.splice(idx, 1);
+                saveEmployees();   // ✅ SAVE HERE
+                renderTable();
+              }
+            });
+
+
+            /*---------------------------------------------------------
+              SETTINGS MODAL
+            ----------------------------------------------------------*/
+            $("#site_title").val(settings.title);
+            $("#round_enable").prop("checked", settings.round);
+            $("#calculation_enable").prop("checked", settings.calculation_enable);
+            $("#esic_limit").val(settings.esic_limit);
+            $("#month_days").val(settings.month_days);
+
+
+            // After reading settings from localStorage
+            let sig = settings.signature || "";
+            $('#signature').tagsinput('removeAll'); // Clear any existing tags
+            sig.split(',').forEach(tag => {
+              if (tag.trim()) $('#signature').tagsinput('add', tag.trim());
+            });
+
+            // 🔁 Update signature preview on change
+            $('#signature').on('itemAdded itemRemoved', function () {
+              renderSignatures();
+            });
+
+            // Initial preview load
+            renderSignatures();
+
+            $("#saveSettings").click(function () {
+              let sig = $('#signature').tagsinput('items').join(',');
+              settings.signature = sig;
+
+              settings.title = $("#site_title").val().trim() || "Salary Table Sheet Creator";
+              settings.round = $("#round_enable").prop("checked");
+              settings.calculation_enable = $("#calculation_enable").prop("checked");
+              settings.esic_limit = parseInt($("#esic_limit").val()) || 21000;
+              settings.month_days = parseInt($("#month_days").val()) || 30;
+
+              localStorage.setItem("settings", JSON.stringify(settings));
+
+              $("h2.text-center").html(val(settings.title));
+
+              $("#settingsModal").modal("hide");
+
+              if (settings.calculation_enable === true) { $("body").addClass("calcu-enable"); } else { $("body").removeClass("calcu-enable"); }
+
+
+              toggleRoundNote();
+
+              renderTable();
+            });
+
+
+            /*---------------------------------------------------------
+              Initial Table Load
+            ----------------------------------------------------------*/
+            renderTable();
+
+          });
+        </script>
+
+      </div>
+
+      <footer class="bg-dark">
+
+        <div class="d-lg-flex justify-content-between align-items-center p-3 text-center text-lg-start">
+          <!-- copyright text -->
+          <div class="text-muted text-primary-hover"> Copyrights ©2023 DHEW. Build by <a
+              href="https://www.webestica.com/" class="text-muted">Amit Kumar (DEO)</a>. </div>
+
+        </div>
+
+      </footer>
+
+    </div>
+
+  </main>
+</body>
+
+</html>

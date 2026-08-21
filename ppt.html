@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>मिशन शक्ति योजना – अररिया | Government Presentation</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+    body{
+      background:#f4f7f6;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .tree-container{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+      padding:20px;
+    }
+
+    .logo-node{
+      width:190px;
+      height:190px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#ff4081,#ff6f00);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      animation:float 3s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+      100%{transform:translateY(0)}
+    }
+
+    .branches{
+      display:none;
+      margin-top:40px;
+      animation:fadeSlideUp 0.8s ease forwards;
+    }
+
+    .branch{
+      width:280px;
+      padding:14px;
+      background:#198754;
+      color:#fff;
+      border-radius:14px;
+      margin:12px auto;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .branch:hover{
+      transform:translateY(-6px);
+      background:#146c43;
+    }
+
+    .details{
+      display:none;
+      max-width:750px;
+      background:#fff;
+      padding:25px;
+      border-radius:16px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.18);
+      text-align:left;
+      animation:zoomFade 0.6s ease forwards;
+    }
+
+    .details h4{
+      color:#d63384;
+      margin-bottom:10px;
+    }
+
+    .back-btn{
+      margin-top:20px;
+    }
+
+    @keyframes fadeSlideUp{
+      from{opacity:0; transform:translateY(30px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    @keyframes zoomFade{
+      from{opacity:0; transform:scale(0.9)}
+      to{opacity:1; transform:scale(1)}
+    }
+
+    /* -------- DESKTOP TREE POLISH -------- */
+    @media (min-width: 992px){
+      .tree{
+        position:relative;
+        width:900px;
+        height:420px;
+        margin-top:40px;
+      }
+
+      .tree::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:50%;
+        width:4px;
+        height:100%;
+        background:#adb5bd;
+        transform:translateX(-50%);
+        animation:growTrunk 1.2s ease forwards;
+      }
+
+      .branch{
+        position:absolute;
+        width:260px;
+      }
+
+      .left1{left:0; top:20px}
+      .left2{left:0; top:90px}
+      .left3{left:0; top:160px}
+      .left4{left:0; top:230px}
+
+      .right1{right:0; top:20px}
+      .right2{right:0; top:90px}
+      .right3{right:0; top:160px}
+      .right4{right:0; top:230px}
+    }
+
+    @keyframes growTrunk{
+      from{height:0}
+      to{height:100%}
+    }
+      to{opacity:1; transform:scale(1)}
+    }
+
+    /* -------------------- RESPONSIVE DESIGN -------------------- */
+    @media (max-width: 992px){
+      .branch{width:90%;}
+      .details{max-width:90%;}
+    }
+
+    @media (max-width: 768px){
+      .logo-node{
+        width:150px;
+        height:150px;
+      }
+
+      .logo-node h5{font-size:1rem;}
+      .logo-node small{font-size:0.8rem;}
+
+      .branch{
+        font-size:0.95rem;
+        padding:12px;
+      }
+
+      .details{
+        padding:20px;
+        font-size:0.95rem;
+      }
+    }
+
+    @media (max-width: 480px){
+      .tree-container{padding:10px;}
+
+      .logo-node{
+        width:120px;
+        height:120px;
+      }
+
+      #logoDesc{
+        font-size:0.9rem;
+      }
+
+      .branch{
+        margin:8px auto;
+      }
+
+      .details h4{
+        font-size:1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress" id="bar"></div>
+<div class="watermark">Mission Shakti | Araria District</div>
+
+<div class="tree-container">
+
+<!-- ROOT SLIDE -->
+<div class="root" id="root">
+  <div class="logo-node">
+    <div>
+      <h5 class="mb-1">मिशन शक्ति</h5>
+      <small>अररिया जिला</small>
+    </div>
+  </div>
+</div>
+<p id="rootText" class="mt-3"><b>महिला सुरक्षा • सम्मान • आत्मनिर्भरता</b></p>
+
+<!-- TREE -->
+<div class="tree" id="tree">
+  <div class="branch left1" data-id="osc">वन स्टॉप सेंटर</div>
+  <div class="branch left2" data-id="legal">कानूनी सहायता</div>
+  <div class="branch left3" data-id="health">स्वास्थ्य सहयोग</div>
+  <div class="branch left4" data-id="helpline">हेल्पलाइन 181</div>
+
+  <div class="branch right1" data-id="dhew">जिला हब (DHEW)</div>
+  <div class="branch right2" data-id="palna">पालना घर</div>
+  <div class="branch right3" data-id="skill">कौशल विकास</div>
+  <div class="branch right4" data-id="aware">जागरूकता अभियान</div>
+</div>
+
+<!-- DETAILS -->
+<div class="details" id="osc"><h4>वन स्टॉप सेंटर</h4><p>पीड़ित महिलाओं को पुलिस, कानूनी, चिकित्सा एवं परामर्श सेवा एक ही स्थान पर।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="legal"><h4>कानूनी सहायता</h4><p>घरेलू हिंसा, दहेज एवं उत्पीड़न मामलों में निःशुल्क सलाह।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="health"><h4>स्वास्थ्य सहयोग</h4><p>आपात चिकित्सा सहायता एवं रेफरल सुविधा।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="helpline"><h4>महिला हेल्पलाइन 181</h4><p>24×7 त्वरित सहायता सेवा।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="dhew"><h4>जिला हब (DHEW)</h4><p>महिलाओं को योजनाओं, रोजगार एवं अधिकारों से जोड़ना।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="palna"><h4>पालना घर</h4><p>कार्यरत महिलाओं के बच्चों हेतु सुरक्षित डे-केयर।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="skill"><h4>कौशल विकास</h4><p>प्रशिक्षण द्वारा महिलाओं को आत्मनिर्भर बनाना।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+<div class="details" id="aware"><h4>जागरूकता अभियान</h4><p>महिला अधिकारों व योजनाओं पर निरंतर जागरूकता।</p><button class="btn btn-outline-secondary back">◀ वापस</button></div>
+
+</div>
+
+<script>
+let timer;
+const synth = window.speechSynthesis;
+let voices = [];
+
+function loadVoices(){ voices = synth.getVoices(); }
+synth.onvoiceschanged = loadVoices;
+
+function speak(text){
+  if(!synth) return;
+  synth.cancel();
+  let utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'hi-IN';
+  utter.rate = 0.9;
+  utter.pitch = 1;
+  utter.voice = voices.find(v=>v.lang==='hi-IN') || voices[0];
+  synth.speak(utter);
+}
+
+function autoBar(){
+  let w=0;
+  clearInterval(timer);
+  $('#bar').css('width','0');
+  timer=setInterval(()=>{w+=1;$('#bar').css('width',w+'%'); if(w>=100) clearInterval(timer)},80);
+}
+
+$('#root').on('click',()=>{
+  speak('मिशन शक्ति योजना, अररिया जिला। महिला सुरक्षा, सम्मान और आत्मनिर्भरता की दिशा में एक सशक्त पहल।');
+  $('#root,#rootText').hide();
+  $('#tree').fadeIn();
+  autoBar();
+});
+
+$('.branch').on('click',function(){
+  let id=$(this).data('id');
+  let textMap={
+    osc:'वन स्टॉप सेंटर, मिशन शक्ति योजना का एक अत्यंत महत्वपूर्ण घटक है। इसका उद्देश्य हिंसा या उत्पीड़न से पीड़ित महिलाओं को एक ही स्थान पर समग्र सहायता प्रदान करना है। यहां महिला को पुलिस सहायता, कानूनी परामर्श, चिकित्सा सुविधा, मनोवैज्ञानिक काउंसलिंग एवं अस्थायी आश्रय की सुविधा उपलब्ध कराई जाती है। इससे पीड़ित महिला को बार-बार विभिन्न कार्यालयों के चक्कर नहीं लगाने पड़ते और उसे त्वरित तथा सम्मानजनक सहायता मिलती है। अररिया जिले में वन स्टॉप सेंटर महिला सुरक्षा की दिशा में एक सशक्त माध्यम बनकर कार्य कर रहा है।',
+
+    legal:'कानूनी सहायता मिशन शक्ति योजना का एक महत्वपूर्ण स्तंभ है। इसके अंतर्गत महिलाओं को घरेलू हिंसा, दहेज उत्पीड़न, यौन शोषण, भरण-पोषण एवं अन्य कानूनी मामलों में निःशुल्क परामर्श प्रदान किया जाता है। महिलाओं को उनके अधिकारों की जानकारी दी जाती है तथा न्यायिक प्रक्रिया को सरल भाषा में समझाया जाता है। अररिया जिले में यह सेवा महिलाओं को न्याय तक पहुंच दिलाने में प्रभावी भूमिका निभा रही है।',
+
+    health:'स्वास्थ्य सहयोग के अंतर्गत संकटग्रस्त महिलाओं को आवश्यक चिकित्सा सुविधा उपलब्ध कराई जाती है। आपात स्थिति में प्राथमिक उपचार, मेडिकल जांच एवं अस्पताल रेफरल की सुविधा दी जाती है। शारीरिक स्वास्थ्य के साथ-साथ मानसिक स्वास्थ्य पर भी विशेष ध्यान दिया जाता है। मिशन शक्ति योजना के अंतर्गत अररिया जिले में यह सेवा महिलाओं के संपूर्ण स्वास्थ्य संरक्षण हेतु कार्यरत है।',
+
+    helpline:'महिला हेल्पलाइन 181 चौबीसों घंटे संचालित एक राज्य स्तरीय सेवा है। किसी भी आपात स्थिति, हिंसा या सहायता की आवश्यकता होने पर महिलाएं इस नंबर पर कॉल कर त्वरित सहायता प्राप्त कर सकती हैं। प्रशिक्षित कर्मियों द्वारा कॉल रिसीव कर आवश्यक विभागों से समन्वय स्थापित किया जाता है। अररिया जिले में यह हेल्पलाइन महिलाओं के लिए विश्वास और सुरक्षा का माध्यम बनी हुई है।',
+
+    dhew:'जिला हब फॉर एंपावरमेंट ऑफ विमेन, जिसे डीएचईडब्ल्यू कहा जाता है, महिलाओं को विभिन्न सरकारी योजनाओं से जोड़ने का कार्य करता है। यहां महिलाओं को स्वरोजगार, कौशल विकास, सामाजिक सुरक्षा एवं अधिकारों की जानकारी दी जाती है। अररिया जिले में डीएचईडब्ल्यू महिलाओं को आत्मनिर्भर बनाने और उन्हें मुख्यधारा से जोड़ने में महत्वपूर्ण भूमिका निभा रहा है।',
+
+    palna:'पालना घर योजना कार्यरत महिलाओं के लिए एक महत्वपूर्ण सुविधा है। इसके अंतर्गत उनके छोटे बच्चों के लिए सुरक्षित, स्वच्छ एवं देखरेख युक्त डे-केयर की व्यवस्था की जाती है। इससे महिलाएं निश्चिंत होकर अपने कार्यस्थल पर कार्य कर पाती हैं। अररिया जिले में पालना घर महिलाओं की कार्य सहभागिता को बढ़ावा देने में सहायक सिद्ध हो रहा है।',
+
+    skill:'कौशल विकास कार्यक्रम के माध्यम से महिलाओं को आत्मनिर्भर बनाने हेतु विभिन्न प्रकार के प्रशिक्षण प्रदान किए जाते हैं। सिलाई, कढ़ाई, कंप्यूटर, स्वरोजगार एवं अन्य व्यावसायिक कौशलों के माध्यम से महिलाओं को रोजगार के अवसर उपलब्ध कराए जाते हैं। मिशन शक्ति योजना के तहत अररिया जिले में यह पहल महिलाओं के आर्थिक सशक्तिकरण की दिशा में महत्वपूर्ण है।',
+
+    aware:'जागरूकता अभियान मिशन शक्ति योजना का आधार है। इसके अंतर्गत महिलाओं को उनके अधिकारों, सुरक्षा उपायों एवं सरकारी योजनाओं की जानकारी दी जाती है। गांव, पंचायत एवं शहरी क्षेत्रों में नियमित जागरूकता कार्यक्रम आयोजित किए जाते हैं। अररिया जिले में यह अभियान समाज में सकारात्मक परिवर्तन लाने का कार्य कर रहा है।'
+  };
+  speak(textMap[id]);
+  $('#tree').hide();
+  $('.details').hide();
+  $('#'+id).fadeIn();
+});
+
+$('.back').on('click',function(){
+  synth.cancel();
+  $('.details').hide();
+  $('#tree').fadeIn();
+});
+
+$(document).on('keydown',e=>{
+  if(e.key==='Escape') $('.back:visible').click();
+});
+</script>
+
+</body>
+</html>
