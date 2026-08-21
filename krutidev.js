@@ -1,142 +1,51 @@
-var kruti_array = new Array("Ã±","Q+Z","sas","aa",")Z","ZZ","â€˜","â€™","â€œ","â€","Ã¥",  "Æ’",  "â€ž",   "â€¦",   "â€ ",   "â€¡",   "Ë†",   "â€°",   "Å ",   "â€¹", "Â¶+",   "d+", "[+k","[+", "x+",  "T+",  "t+", "M+", "<+", "Q+", ";+", "j+", "u+","Ã™k", "Ã™", "Ã¤", "â€“", "â€”","Ã©","â„¢","=kk","f=k",  "Ã ",   "Ã¡",    "Ã¢",   "Ã£",   "Âºz",  "Âº",   "Ã­", "{k", "{", "=",  "Â«", "NÃ®",   "VÃ®",    "BÃ®",   "MÃ®",   "<Ã®", "|", "K", "}","J",   "VÂª",   "MÂª",  "<ÂªÂª",  "NÂª",   "Ã˜",  "Ã", "nzZ",  "Ã¦", "Ã§", "Ã", "xz", "#", ":", "vâ€š","vks",  "vkS",  "vk",    "v",  "bÂ±", "Ãƒ",  "bZ",  "b",  "m",  "Ã…",  ",s",  ",",   "_","Ã´",  "d", "Dk", "D", "[k", "[", "x","Xk", "X", "Ã„", "?k", "?",   "Â³", "pkS",  "p", "Pk", "P",  "N",  "t", "Tk", "T",  ">", "Ã·", "Â¥","Ãª",  "Ã«",   "V",  "B",   "Ã¬",   "Ã¯", "M+", "<+", "M",  "<", ".k", ".", "r",  "Rk", "R",   "Fk", "F",  ")", "n", "/k", "Ã¨k",  "/", "Ã‹", "Ã¨", "u", "Uk", "U",   "i",  "Ik", "I",   "Q",    "Â¶",  "c", "Ck",  "C",  "Hk",  "H", "e", "Ek",  "E", ";",  "Â¸",   "j",    "y", "Yk",  "Y",  "G",  "o", "Ok", "O", "'k", "'",   "\"k",  "\"",  "l", "Lk",  "L",   "g",  "Ãˆ", "z", "ÃŒ", "Ã", "ÃŽ",  "Ã",  "Ã‘",  "Ã’",  "Ã“",  "Ã”",   "Ã–",  "Ã˜",  "Ã™","Ãœk", "Ãœ","â€š",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S", "a",    "Â¡",    "%",     "W",  "â€¢", "Â·", "âˆ™", "Â·", "~j",  "~", "\\","+"," à¤ƒ","^", "*",  "Ãž", "ÃŸ", "(", "Â¼", "Â½", "Â¿", "Ã€", "Â¾", "A", "-", "&", "&", "Å’", "]","~ ","@");
+var kruti_array = new Array("ñ","Q+Z","sas","aa",")Z","ZZ","‘","’","“","”","å",  "ƒ",  "„",   "…",   "†",   "‡",   "ˆ",   "‰",   "Š",   "‹", "¶+",   "d+", "[+k","[+", "x+",  "T+",  "t+", "M+", "<+", "Q+", ";+", "j+", "u+","™k", "™", "ä", "–", "—","©","™","=kk","f=k",  " ",   "á",    "â",   "ã",   "ºz",  "º",   "í", "{k", "{", "=",  "«", "Nî",   "Vî",    "Bî",   "Mî",   "<î", "|", "K", "}","J",   "Vª",   "Mª",  "<ªª",  "Nª",   "Ø",  "", "nzZ",  "æ", "§", "Á", "xz", "#", ":", "v‚","vks",  "vkS",  "vk",    "v",  "b±", "ƒ",  "bZ",  "b",  "m",  "Å",  ",s",  ",",   "_","´",  "d", "Dk", "D", "[k", "[", "x","Xk", "X", "„", "?k", "?",   "³", "pkS",  "p", "Pk", "P",  "N",  "t", "Tk", "T",  ">", "÷", "¥","ª",  "«",   "V",  "B",   "¬",   "¯", "M+", "<+", "M",  "<", ".k", ".", "r",  "Rk", "R",   "Fk", "F",  ")", "n", "/k", "èk",  "/", "‹", "è", "u", "Uk", "U",   "i",  "Ik", "I",   "Q",    "¶",  "c", "Ck",  "C",  "Hk",  "H", "e", "Ek",  "E", ";",  "¸",   "j",    "y", "Yk",  "Y",  "G",  "o", "Ok", "O", "'k", "'",   "\"k",  "\"",  "l", "Lk",  "L",   "g",  "ˆ", "z", "Œ", "", "Ž",  "",  "‘",  "’",  "“",  "”",   "–",  "˜",  "™","œk", "œ","‚",    "ks",   "kS",   "k",  "h",    "q",   "w",   "`",    "s",    "S", "a",    "¡",    "%",     "W",  "•", "·", "∙", "·", "~j",  "~", "\\","+"," ƒ","^", "*",  "ž", "Ÿ", "(", "¼", "½", "¿", "À", "¾", "A", "-", "&", "&", "Œ", "]","~ ","@");
 
-var unicode_array = new Array("à¥°","QZ+","sa","a","à¤°à¥à¤¦à¥à¤§","Z","\"","\"","'","'", "à¥¦",  "à¥§",  "à¥¨",  "à¥©",     "à¥ª",   "à¥«",  "à¥¬",   "à¥­",   "à¥®",   "à¥¯",  "à¥žà¥",  "à¥˜",  "à¥™", "à¥™à¥",  "à¥š", "à¤œà¤¼à¥", "à¥›",  "à¥œ",  "à¥",   "à¥ž",  "à¥Ÿ",  "à¤±",  "à¤©",  "à¤¤à¥à¤¤", "à¤¤à¥à¤¤à¥", "à¤•à¥à¤¤",  "à¤¦à¥ƒ",  "à¤•à¥ƒ","à¤¨à¥à¤¨","à¤¨à¥à¤¨à¥","=k","f=", "à¤¹à¥à¤¨",  "à¤¹à¥à¤¯",  "à¤¹à¥ƒ",  "à¤¹à¥à¤®",  "à¤¹à¥à¤°",  "à¤¹à¥",   "à¤¦à¥à¤¦",  "à¤•à¥à¤·", "à¤•à¥à¤·à¥", "à¤¤à¥à¤°", "à¤¤à¥à¤°à¥",  "à¤›à¥à¤¯",  "à¤Ÿà¥à¤¯",  "à¤ à¥à¤¯",  "à¤¡à¥à¤¯",  "à¤¢à¥à¤¯", "à¤¦à¥à¤¯", "à¤œà¥à¤ž", "à¤¦à¥à¤µ", "à¤¶à¥à¤°",  "à¤Ÿà¥à¤°",    "à¤¡à¥à¤°",    "à¤¢à¥à¤°",    "à¤›à¥à¤°",   "à¤•à¥à¤°",  "à¤«à¥à¤°", "à¤°à¥à¤¦à¥à¤°",  "à¤¦à¥à¤°",   "à¤ªà¥à¤°", "à¤ªà¥à¤°",  "à¤—à¥à¤°", "à¤°à¥",  "à¤°à¥‚", "à¤‘",   "à¤“",  "à¤”",  "à¤†",   "à¤…", "à¤ˆà¤‚", "à¤ˆ",  "à¤ˆ",   "à¤‡",  "à¤‰",   "à¤Š",  "à¤",  "à¤", "à¤‹", "à¤•à¥à¤•", "à¤•", "à¤•", "à¤•à¥", "à¤–", "à¤–à¥", "à¤—", "à¤—", "à¤—à¥", "à¤˜", "à¤˜", "à¤˜à¥", "à¤™", "à¤šà¥ˆ",  "à¤š", "à¤š", "à¤šà¥", "à¤›", "à¤œ", "à¤œ", "à¤œà¥",  "à¤",  "à¤à¥", "à¤ž", "à¤Ÿà¥à¤Ÿ",   "à¤Ÿà¥à¤ ",   "à¤Ÿ",   "à¤ ",   "à¤¡à¥à¤¡",   "à¤¡à¥à¤¢",  "à¤¡à¤¼", "à¤¢à¤¼", "à¤¡",   "à¤¢", "à¤£", "à¤£à¥", "à¤¤", "à¤¤", "à¤¤à¥", "à¤¥", "à¤¥à¥",  "à¤¦à¥à¤§",  "à¤¦", "à¤§", "à¤§", "à¤§à¥", "à¤§à¥", "à¤§à¥", "à¤¨", "à¤¨", "à¤¨à¥",    "à¤ª", "à¤ª", "à¤ªà¥",  "à¤«", "à¤«à¥",  "à¤¬", "à¤¬", "à¤¬à¥",  "à¤­", "à¤­à¥",  "à¤®",  "à¤®", "à¤®à¥", "à¤¯", "à¤¯à¥",  "à¤°", "à¤²", "à¤²", "à¤²à¥",  "à¤³",  "à¤µ", "à¤µ", "à¤µà¥", "à¤¶", "à¤¶à¥",  "à¤·", "à¤·à¥", "à¤¸", "à¤¸", "à¤¸à¥", "à¤¹", "à¥€à¤‚", "à¥à¤°", "à¤¦à¥à¤¦", "à¤Ÿà¥à¤Ÿ","à¤Ÿà¥à¤ ","à¤¡à¥à¤¡","à¤•à¥ƒ","à¤­","à¥à¤¯","à¤¡à¥à¤¢","à¤à¥","à¤•à¥à¤°","à¤¤à¥à¤¤à¥","à¤¶","à¤¶à¥","à¥‰",  "à¥‹",   "à¥Œ",   "à¤¾",   "à¥€",   "à¥",   "à¥‚",   "à¥ƒ",   "à¥‡",   "à¥ˆ", "à¤‚",   "à¤",   "à¤ƒ",   "à¥…",  "à¤½", "à¤½", "à¤½", "à¤½", "à¥à¤°",  "à¥", "?", "à¤¼",":", "â€˜",   "â€™",   "â€œ",   "â€",  ";",  "(",    ")",   "{",    "}",   "=", "à¥¤", ".", "-",  "Âµ", "à¥°", ",","à¥ ","/");
+var unicode_array = new Array("ॐ","QZ+ validation","sa","a","र्द्ध","Z","\"","\"","'","'", "०",  "१",  "२",  "३",     "४",   "५",  "६",   "७",   "८",   "९",  "फ़्",  "क़",  "ख़", "ख़्",  "ग़", "ज़्", "ज़",  "ड़",  "ढ़",   "फ़",  "य़",  "ऱ",  "ऩ",  "त्त", "त्त्", "क्त",  "दृ",  "कृ","न्न","न्न्","=k","f=", "ह्न",  "ह्य",  "हृ",  "ह्म",  "ह्र",  "ह",   "द्द",  "क्ष", "क्ष्", "त्र", "त्र्",  "छ्य",  "ट्य",  "ठ्य",  "ड्य",  "ढ्य", "द्य", "ज्ञ", "द्व", "श्र",  "ट्र",    "ड्र",    "ढ्र",    "छ्र",   "क्र",  "फ्र", "र्द्र",  "द्र",   "प्र", "प्र",  "ग्र", "रु",  "रू", "ऑ",   "ओ",  "औ",  "आ",   "अ", "ईं", "ई",  "ई",   "इ",  "उ",   "ऊ",  "ऐ",  "ए", "ऋ", "क्क", "क", "क", "क्", "ख", "ख्", "ग", "ग", "ग्", "घ", "घ", "घ्", "ङ", "चै",  "च", "च", "क्", "छ", "ज", "ज", "ज्",  "झ",  "झ्", "ञ", "ट्ट",   "ट्ठ",   "ट",   "ठ",   "ड्ड",   "ड्ढ",  "ड़", "ढ़", "ड",   "ढ", "ण", "ण्", "त", "त", "त्", "थ", "थ्",  "द्ध",  "द", "ध", "ध", "ध्", "ध्", "ध्", "न", "न", "न्",    "प", "प", "प्",  "फ", "फ्",  "ब", "ब", "ब्",  "भ", "भ्",  "म",  "म", "म्", "य", "य्",  "र", "ल", "ल", "ल्",  "ळ",  "व", "व", "व्", "श", "श्",  "ष", "ष्", "स", "स", "स्", "ह", "ीं", "्र", "द्द", "ट्ट","ट्ठ","ड्ड","कृ","भ","्य","ड्ढ","झ्","क्र","त्त्","श","श्","ऑ",  "ो",   "ौ",   "ा",   "ी",   "ु",   "ू",   "ृ",   "े",   "ै", "ं",   "ँ",   "ः",   "ॅ",  "ऽ", "ऽ", "ऽ", "ऽ", "्र",  "्", "?", "़",":", "‘",   "’",   "“",   "”",  ";",  "(",    ")",   "{",    "}",   "=", "।", ".", "-",  "µ", "ॐ", ",","् ","/");
+
 function krutiunicode()
 {
+    var k = document.getElementById("krutitext");
+    var u = document.getElementById("unicodetext");
+    if (!k || !u) return;
 
-var text_size = document.getElementById("krutitext").value.length ;
-var kruti_array_length = kruti_array.length ;
-var kruti_text = document.getElementById("krutitext").value  ;
+    var kruti_text = k.value;
+    var processed_text = '';
 
-    var processed_text = '' ;
+    if (kruti_text != "") {
+        // Standard replacement loop
+        for (var i = 0; i < kruti_array.length; i++) {
+            var regex = new RegExp(escapeRegExp(kruti_array[i]), "g");
+            kruti_text = kruti_text.replace(regex, unicode_array[i]);
+        }
 
-    var n = 0 ;  var o = 0 ;  var r = 1 ;
+        // Special Krutidev Logic
+        kruti_text = kruti_text.replace(/Æ/g, "र्f");
 
-    var max_text_size = 7000;
+        // Chhoti Ee fix
+        var pi = kruti_text.indexOf("f");
+        while (pi != -1) {
+            var char_next = kruti_text.charAt(pi + 1);
+            kruti_text = kruti_text.replace("f" + char_next, char_next + "ि");
+            pi = kruti_text.indexOf("f", pi + 1);
+        }
 
-    while ( r == 1 )
-    {
-     n = o ;
-
-     if ( o < ( text_size - max_text_size ) )
-     {
-      o +=  max_text_size ;
-      while (document.getElementById("krutitext").value.charAt ( o ) != ' ') {o--;}
-     }
-     else  { o = text_size  ;  r = 0 }
-
-     var kruti_text = document.getElementById("krutitext").value.substring ( n, o )  ;
-
-    replsym( ) ;
-
-    processed_text += kruti_text ;
-
-
-    document.getElementById("unicodetext").value = processed_text  ;
-   }
-
-
-function replsym( )
-
-{
-
-
-if ( kruti_text != "" )
-for ( input_symbol_idx = 0;   input_symbol_idx < kruti_array_length;    input_symbol_idx++ )
-
-{
-
-idx = 0  ;
-
-while (idx != -1 )
-{
-
-kruti_text = kruti_text.replace( kruti_array[ input_symbol_idx ] , unicode_array[input_symbol_idx] )
-idx = kruti_text.indexOf( kruti_array[input_symbol_idx] )
-
-}
-}
-kruti_text = kruti_text.replace( /Â±/g , "Zà¤‚" ) ;
-
-
-kruti_text = kruti_text.replace( /Ã†/g , "à¤°à¥f" ) ;
-
-var pi = kruti_text.indexOf( "f" )
-
-while ( pi != -1 )
-{
-var cni = kruti_text.charAt( pi + 1 )
-var ctbr = "f" + cni
-kruti_text = kruti_text.replace( ctbr , cni + "à¤¿" )
-pi = kruti_text.search( /f/ , pi + 1 )
-
+        // Reph logic
+        var matras = "अ आ इ ई उ ऊ ए ऐ ओ औ ा ि ी ु ू ृ े ै ो ौ ं : ँ ॅ";
+        var rpos = kruti_text.indexOf("Z");
+        while (rpos > 0) {
+            var pphr = rpos - 1;
+            while (pphr >= 0 && matras.indexOf(kruti_text.charAt(pphr)) != -1) {
+                pphr--;
+            }
+            var target = kruti_text.substring(pphr, rpos);
+            kruti_text = kruti_text.replace(target + "Z", "र्" + target);
+            rpos = kruti_text.indexOf("Z", rpos + 1);
+        }
+    }
+    u.value = kruti_text;
+    if (typeof updateCharCount === 'function') updateCharCount('unicodetext', 'uni-count');
 }
 
-kruti_text = kruti_text.replace( /Ã‡/g , "fa" ) ;
-kruti_text = kruti_text.replace( /Ã‰/g , "à¤°à¥fa" ) ;
-
-var pi = kruti_text.indexOf( "fa" )
-
-while ( pi != -1 )
-{
-var cntip2 = kruti_text.charAt( pi + 2 )
-var ctbr = "fa" + cntip2
-kruti_text = kruti_text.replace( ctbr , cntip2 + "à¤¿à¤‚" )
-pi = kruti_text.search( /fa/ , pi + 2 )
-
-}
-
-kruti_text = kruti_text.replace( /ÃŠ/g , "à¥€Z" ) ;
-
-
-var powe = kruti_text.indexOf( "à¤¿à¥" )
-
-while ( powe != -1 )
-
-{
-var cntwe = kruti_text.charAt( powe + 2 )
-var ctbr = "à¤¿à¥" + cntwe
-kruti_text = kruti_text.replace( ctbr , "à¥" + cntwe + "à¤¿" )
-powe = kruti_text.search( /à¤¿à¥/ , powe + 2 )
-
-}
-matraslist = "à¤… à¤† à¤‡ à¤ˆ à¤‰ à¤Š à¤ à¤ à¤“ à¤” à¤¾ à¤¿ à¥€ à¥ à¥‚ à¥ƒ à¥‡ à¥ˆ à¥‹ à¥Œ à¤‚ : à¤ à¥…"
-var rpos = kruti_text.indexOf( "Z" )
-
-while ( rpos > 0 )
-{
-pphr = rpos - 1 ;
-var chtr = kruti_text.charAt( pphr )
-
-
-while ( matraslist.match( chtr ) != null )
-
-{
-pphr = pphr - 1 ;
-chtr = kruti_text.charAt( pphr ) ;
-
-}
-
-
-ctbr = kruti_text.substr ( pphr , ( rpos - pphr ) ) ;
-rstr = "à¤°à¥" + ctbr ;
-ctbr = ctbr + "Z" ;
-kruti_text = kruti_text.replace( ctbr , rstr ) ;
-rpos = kruti_text.indexOf( "Z" ) ;
-
-}
-
-}
-
-}
-function copyclipboard() {
-   var copyText = document.querySelector("#unicodetext");
-   copyText.select();
-   copyText.setSelectionRange(0, 99999);
-   document.execCommand("copy");
-   alert("Text Copied To Clipboard.");
-}
-function cleartext() {
-	document.getElementById("krutitext").value = '';
-	document.getElementById("unicodetext").value = '';
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
