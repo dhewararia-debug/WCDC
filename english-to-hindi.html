@@ -144,10 +144,10 @@
 
                         <div class="mb-4">
                             <div class="text-area-label">
-                                <label for="unicodetext">Type in English (Space to Convert)</label>
+                                <label for="unicodetext">Type directly in Hindi / phonetic script</label>
                                 <button class="btn btn-outline-primary copy-btn" onclick="copyToClipboard('unicodetext')">Copy</button>
                             </div>
-                            <textarea id="unicodetext" oninput="updateCharCount('unicodetext', 'uni-count')" placeholder="Type words like 'namaste' or 'mera naam' and press Space..."></textarea>
+                            <textarea id="unicodetext" oninput="updateCharCount('unicodetext', 'uni-count')" placeholder="Hindi typing start karein... jaise naam, shiksha, aaj"></textarea>
                             <div class="d-flex justify-content-between mt-1">
                                 <div id="status" class="text-muted small">Status: Ready</div>
                                 <div id="uni-count" class="char-count">Characters: 0</div>
@@ -173,9 +173,9 @@
                         <div class="mt-4 p-3 bg-light rounded small text-dark border-start border-primary border-4">
                             <strong>Instructions:</strong>
                             <ul class="mb-0 mt-1">
-                                <li>Type any Hindi word in English script (e.g., <code>amit</code>).</li>
-                                <li><strong>Press Space</strong> to convert the word to Hindi (<code>अमित</code>).</li>
-                                <li>If the conversion is wrong, <strong>Click</strong> the word for more suggestions.</li>
+                                <li>Hindi typing local Devnagari keyboard se live hoti hai.</li>
+                                <li><strong>Space press nahi karna</strong>; text direct Hindi format me type hota hai.</li>
+                                <li>Phonetic English se bhi Hindi ki tarah input ho sakta hai.</li>
                                 <li>Click <strong>Convert to Krutidev</strong> for the legacy version.</li>
                             </ul>
                         </div>
@@ -196,6 +196,7 @@
 
     <script src="./jquery.min.js"></script>
     <script src="./bootstrap.bundle.js"></script>
+    <script src="./devnagari-language.min.js"></script>
     <script src="./unicode.js"></script>
 
     <script>
@@ -203,56 +204,50 @@
         const status = document.getElementById('status');
         const suggestionsBox = document.getElementById('suggestions');
 
-        let lastConvertedRange = { start: 0, end: 0 };
+        if (typeof window !== 'undefined' && typeof GetNewKeyboard === 'function') {
+            const keyboard = GetNewKeyboard('unicodetext', 'awTable');
+            window.inputBoxIds = window.inputBoxIds || [];
+            window.inputBoxIds[window.inputBoxCount || 0] = keyboard;
+            window.inputBoxCount = (window.inputBoxCount || 0) + 1;
 
-        textarea.addEventListener('keydown', async (e) => {
-            if (e.key === " " || e.key === "Enter" || /^[.,!?;:]$/.test(e.key)) {
-                const cursorPosition = textarea.selectionStart;
-                const textBeforeCursor = textarea.value.substring(0, cursorPosition);
-
-                // Match the last word (alphabetic only)
-                const lastWordMatch = textBeforeCursor.match(/([a-zA-Z]+)$/);
-
-                if (lastWordMatch) {
-                    const lastWord = lastWordMatch[0];
-                    status.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Converting...`;
-
-                    try {
-                        const response = await fetch(`https://inputtools.google.com/request?text=${lastWord}&itc=hi-t-i0-und&num=5&cp=0&cs=1&ie=utf-8&oe=utf-8&app=test`);
-                        const data = await response.json();
-
-                        if (data[0] === "SUCCESS") {
-                            const suggestions = data[1][0][1];
-                            const hindiWord = suggestions[0];
-                            const textAfterCursor = textarea.value.substring(cursorPosition);
-                            const newTextBeforeCursor = textBeforeCursor.substring(0, textBeforeCursor.length - lastWord.length) + hindiWord;
-
-                            const separator = (e.key === " " ? " " : (e.key === "Enter" ? "\n" : e.key));
-                            textarea.value = newTextBeforeCursor + separator + textAfterCursor;
-
-                            const newPos = newTextBeforeCursor.length + 1;
-                            textarea.setSelectionRange(newPos, newPos);
-
-                            lastConvertedRange = { start: newTextBeforeCursor.length - hindiWord.length, end: newTextBeforeCursor.length };
-
-                            e.preventDefault();
-                            status.innerText = "Converted: " + hindiWord;
-                            updateCharCount('unicodetext', 'uni-count');
-                        } else {
-                            status.innerText = "API Error";
-                        }
-                    } catch (error) {
-                        console.error("Transliteration Error:", error);
-                        status.innerText = "Check connection";
-                    }
+            textarea.onkeydown = function (event) {
+                if (typeof positionChange === 'function') {
+                    positionChange(event, keyboard);
                 }
-            } else {
-                suggestionsBox.style.display = 'none';
-            }
-        });
+            };
 
-        // Simple suggestion placement on click (experimental)
-        textarea.addEventListener('click', (e) => {
+            textarea.onkeypress = function (event) {
+                if (keyboard && !keyboard.isEng) {
+                    return processInput(event, keyboard);
+                }
+                return true;
+            };
+
+            textarea.onkeyup = function () {
+                if (typeof changeCursor === 'function') {
+                    changeCursor(this);
+                }
+                updateCharCount('unicodetext', 'uni-count');
+            };
+
+            textarea.onfocus = function () {
+                if (typeof changeCursor === 'function') {
+                    changeCursor(this);
+                }
+            };
+
+            textarea.onclick = function () {
+                if (typeof changeCursor === 'function') {
+                    changeCursor(this);
+                }
+            };
+
+            status.innerText = 'Status: Devnagari keyboard active';
+        } else {
+            status.innerText = 'Status: Devnagari keyboard unavailable';
+        }
+
+        textarea.addEventListener('click', () => {
             suggestionsBox.style.display = 'none';
         });
 
